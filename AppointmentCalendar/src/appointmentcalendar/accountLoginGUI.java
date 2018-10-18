@@ -34,72 +34,48 @@ public class accountLoginGUI extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         signInButton = new javax.swing.JButton();
         createNewAccountButton = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         theAppointmentSchedulerTitle.setFont(new java.awt.Font("Copperplate", 0, 24)); // NOI18N
         theAppointmentSchedulerTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         theAppointmentSchedulerTitle.setText("THE APPOINTMENT SCHEDULER");
+        getContentPane().add(theAppointmentSchedulerTitle);
+        theAppointmentSchedulerTitle.setBounds(135, 18, 405, 58);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("EMAIL ADDRESS");
         jLabel2.setToolTipText("");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(147, 82, 110, 16);
 
         emailText.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        getContentPane().add(emailText);
+        emailText.setBounds(147, 104, 357, 24);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("PASSWORD");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(155, 148, 69, 16);
 
         jTextField1.setToolTipText("");
+        getContentPane().add(jTextField1);
+        jTextField1.setBounds(147, 170, 357, 24);
 
         signInButton.setText("SIGN IN");
+        getContentPane().add(signInButton);
+        signInButton.setBounds(409, 253, 78, 32);
 
         createNewAccountButton.setText("CREATE A NEW ACCOUNT");
+        getContentPane().add(createNewAccountButton);
+        createNewAccountButton.setBounds(155, 253, 191, 32);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(135, 135, 135)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(theAppointmentSchedulerTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(createNewAccountButton)
-                                .addGap(63, 63, 63)
-                                .addComponent(signInButton))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(emailText)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(8, 8, 8)
-                                    .addComponent(jLabel3)))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)))
-                .addContainerGap(134, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(theAppointmentSchedulerTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(signInButton)
-                    .addComponent(createNewAccountButton))
-                .addContainerGap(117, Short.MAX_VALUE))
-        );
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appointmentcalendar/xHospital-wallpaper.jpg.pagespeed.ic.EBB6AIGoe3.jpg"))); // NOI18N
+        jLabel4.setText("jLabel4");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(-5, 0, 680, 400);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -145,6 +121,7 @@ public class accountLoginGUI extends javax.swing.JFrame {
     private javax.swing.JTextField emailText;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton signInButton;
     private javax.swing.JLabel theAppointmentSchedulerTitle;
