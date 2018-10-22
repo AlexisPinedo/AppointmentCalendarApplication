@@ -59,14 +59,15 @@ public class accountLoginGUI extends javax.swing.JFrame {
 
         emailText.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         getContentPane().add(emailText);
-        emailText.setBounds(147, 104, 357, 24);
+        emailText.setBounds(147, 104, 357, 21);
 
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("PASSWORD");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(155, 148, 69, 16);
+        jLabel3.setBounds(155, 148, 68, 16);
 
+<<<<<<< HEAD
         passwordText.setToolTipText("");
         getContentPane().add(passwordText);
         passwordText.setBounds(147, 170, 357, 24);
@@ -80,6 +81,15 @@ public class accountLoginGUI extends javax.swing.JFrame {
         });
         getContentPane().add(exitButton);
         exitButton.setBounds(460, 250, 78, 32);
+=======
+        jTextField1.setToolTipText("");
+        getContentPane().add(jTextField1);
+        jTextField1.setBounds(147, 170, 357, 22);
+
+        signInButton.setText("SIGN IN");
+        getContentPane().add(signInButton);
+        signInButton.setBounds(409, 253, 77, 25);
+>>>>>>> 38d459d5b838f667fb460dc0b2c5df0479fdddba
 
         createNewAccountButton.setForeground(new java.awt.Color(255, 255, 255));
         createNewAccountButton.setText("CREATE A NEW ACCOUNT");
@@ -89,7 +99,11 @@ public class accountLoginGUI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(createNewAccountButton);
+<<<<<<< HEAD
         createNewAccountButton.setBounds(100, 250, 191, 32);
+=======
+        createNewAccountButton.setBounds(155, 253, 183, 25);
+>>>>>>> 38d459d5b838f667fb460dc0b2c5df0479fdddba
 
         signInButton1.setForeground(new java.awt.Color(255, 255, 255));
         signInButton1.setText("SIGN IN");
