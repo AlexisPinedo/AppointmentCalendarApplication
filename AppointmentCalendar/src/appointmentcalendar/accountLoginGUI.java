@@ -53,24 +53,24 @@ public class accountLoginGUI extends javax.swing.JFrame {
 
         emailText.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         getContentPane().add(emailText);
-        emailText.setBounds(147, 104, 357, 24);
+        emailText.setBounds(147, 104, 357, 21);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("PASSWORD");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(155, 148, 69, 16);
+        jLabel3.setBounds(155, 148, 68, 16);
 
         jTextField1.setToolTipText("");
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(147, 170, 357, 24);
+        jTextField1.setBounds(147, 170, 357, 22);
 
         signInButton.setText("SIGN IN");
         getContentPane().add(signInButton);
-        signInButton.setBounds(409, 253, 78, 32);
+        signInButton.setBounds(409, 253, 77, 25);
 
         createNewAccountButton.setText("CREATE A NEW ACCOUNT");
         getContentPane().add(createNewAccountButton);
-        createNewAccountButton.setBounds(155, 253, 191, 32);
+        createNewAccountButton.setBounds(155, 253, 183, 25);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appointmentcalendar/xHospital-wallpaper.jpg.pagespeed.ic.EBB6AIGoe3.jpg"))); // NOI18N
         jLabel4.setText("jLabel4");
