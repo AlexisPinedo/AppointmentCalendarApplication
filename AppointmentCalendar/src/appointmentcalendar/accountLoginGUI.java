@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package appointmentcalendar;
+import java.util.Scanner;
+import appointmentcalendar.accountCreatorGUI;
+import java.awt.event.WindowEvent;
 
 /**
  *
@@ -31,20 +34,23 @@ public class accountLoginGUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         emailText = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        signInButton = new javax.swing.JButton();
+        passwordText = new javax.swing.JTextField();
+        exitButton = new javax.swing.JButton();
         createNewAccountButton = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        signInButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         theAppointmentSchedulerTitle.setFont(new java.awt.Font("Copperplate", 0, 24)); // NOI18N
+        theAppointmentSchedulerTitle.setForeground(new java.awt.Color(0, 0, 0));
         theAppointmentSchedulerTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         theAppointmentSchedulerTitle.setText("THE APPOINTMENT SCHEDULER");
         getContentPane().add(theAppointmentSchedulerTitle);
         theAppointmentSchedulerTitle.setBounds(135, 18, 405, 58);
 
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("EMAIL ADDRESS");
         jLabel2.setToolTipText("");
@@ -55,30 +61,74 @@ public class accountLoginGUI extends javax.swing.JFrame {
         getContentPane().add(emailText);
         emailText.setBounds(147, 104, 357, 24);
 
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("PASSWORD");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(155, 148, 69, 16);
 
-        jTextField1.setToolTipText("");
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(147, 170, 357, 24);
+        passwordText.setToolTipText("");
+        getContentPane().add(passwordText);
+        passwordText.setBounds(147, 170, 357, 24);
 
-        signInButton.setText("SIGN IN");
-        getContentPane().add(signInButton);
-        signInButton.setBounds(409, 253, 78, 32);
+        exitButton.setForeground(new java.awt.Color(255, 255, 255));
+        exitButton.setText("EXIT");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(exitButton);
+        exitButton.setBounds(460, 250, 78, 32);
 
+        createNewAccountButton.setForeground(new java.awt.Color(255, 255, 255));
         createNewAccountButton.setText("CREATE A NEW ACCOUNT");
+        createNewAccountButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createNewAccountButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(createNewAccountButton);
-        createNewAccountButton.setBounds(155, 253, 191, 32);
+        createNewAccountButton.setBounds(100, 250, 191, 32);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appointmentcalendar/xHospital-wallpaper.jpg.pagespeed.ic.EBB6AIGoe3.jpg"))); // NOI18N
-        jLabel4.setText("jLabel4");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(-5, 0, 680, 400);
+        signInButton1.setForeground(new java.awt.Color(255, 255, 255));
+        signInButton1.setText("SIGN IN");
+        signInButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signInButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(signInButton1);
+        signInButton1.setBounds(330, 250, 78, 32);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appointmentcalendar/IMG_0134.JPG"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 670, 340);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void systemExit()
+    {
+        WindowEvent winClosing = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+    }
+    
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void signInButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButton1ActionPerformed
+        String email = emailText.getText();
+        String password = passwordText.getText();     
+        
+    }//GEN-LAST:event_signInButton1ActionPerformed
+
+    private void createNewAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewAccountButtonActionPerformed
+        systemExit();
+        accountCreatorGUI creator = new accountCreatorGUI();
+            creator.setVisible(true);
+    }//GEN-LAST:event_createNewAccountButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,11 +169,12 @@ public class accountLoginGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createNewAccountButton;
     private javax.swing.JTextField emailText;
+    private javax.swing.JButton exitButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JButton signInButton;
+    private javax.swing.JTextField passwordText;
+    private javax.swing.JButton signInButton1;
     private javax.swing.JLabel theAppointmentSchedulerTitle;
     // End of variables declaration//GEN-END:variables
 }
