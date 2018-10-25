@@ -6,20 +6,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Random;
-import java.util.UUID;
 
 public class AccountSQLHelper
 {
     static final String JDBC_DRIVER = "org.apache.derby.jdbc.ClientDriver";
-    static final String DB_URL = "jdbc:derby://localhost:1527/343Project1";
+    static final String DB_URL = "jdbc:derby://localhost:1527/343Project1testdb";
 
   //  Database credentials
     static final String USER = "newuser";
     static final String PASS = "newpass";
     public Connection conn;
     public Statement stmt; 
-    Random rand = new Random();
     
     public AccountSQLHelper()
     {
@@ -59,7 +56,6 @@ public class AccountSQLHelper
         {     
         if(table.equals("Patients"))
         {
-            String id = String.format("%06d", rand.nextInt(10000));
             String sql = "SELECT pFname, pLname, pDOB, pEmail FROM Patients WHERE pID = ?";
             PreparedStatement statment = conn.prepareStatement(sql);
             
@@ -200,7 +196,7 @@ public class AccountSQLHelper
         String pFname, pLname, pDOB, pEmail, password;
                  
         try{
-          if(table == 1)
+          if(table == 1) //Patients
           {
               
             while(rs.next())

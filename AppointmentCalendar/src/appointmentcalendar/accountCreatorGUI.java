@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package appointmentcalendar;
-import java.sql.*;
+import java.sql.SQLException;
 import java.awt.event.WindowEvent;
-
+import java.util.Random;
+import java.util.UUID;
 /**
  *
  * @author Pir8
@@ -15,38 +16,14 @@ import java.awt.event.WindowEvent;
    // JDBC driver name and database URL
 
 public class accountCreatorGUI extends javax.swing.JFrame {
-
-    static final String JDBC_DRIVER = "org.apache.derby.jdbc.ClientDriver";
-    static final String DB_URL = "jdbc:derby://localhost:1527/343Project1";
-
-  //  Database credentials
-    static final String USER = "newuser";
-    static final String PASS = "newpass";
-    public Connection conn;
-    public Statement stmt; 
     
+    //String id = String.format("%06d", rand.nextInt(10000));
     /**
      * Creates new form accountCreator
      */
     public accountCreatorGUI()
     {
         initComponents();
-        try
-        {
-          Class.forName(JDBC_DRIVER);
-          conn = DriverManager.getConnection(DB_URL,USER,PASS);
-          stmt = conn.createStatement();
-        }
-        
-        catch(SQLException se)
-        {
-            System.out.println("Cannot connect to Database Server");
-            System.exit(0);
-        }
-        
-        catch(Exception e)
-        {
-        }
     }
     
     /**
