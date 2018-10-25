@@ -275,12 +275,3 @@ public class AccountSQLHelper
         }
     }
 }
-//GENERATE A RANDOM UNIQUE ID
-//            UUID idOne = UUID.randomUUID();
-//            UUID idTwo = UUID.randomUUID();
-//            log("UUID One: " + idOne);
-//            log("UUID Two: " + idTwo);
-
-//  private static void log(Object object){
-//    System.out.println( String.valueOf(object) );
-//  }

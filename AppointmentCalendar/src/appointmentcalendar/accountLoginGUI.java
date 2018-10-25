@@ -7,6 +7,9 @@ package appointmentcalendar;
 import java.util.Scanner;
 import appointmentcalendar.accountCreatorGUI;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class accountLoginGUI extends javax.swing.JFrame {
@@ -17,6 +20,7 @@ public class accountLoginGUI extends javax.swing.JFrame {
     public accountLoginGUI()
     {
         initComponents();
+        setSize(657,342);
     }
 
     /**
@@ -102,7 +106,7 @@ public class accountLoginGUI extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appointmentcalendar/IMG_0134.JPG"))); // NOI18N
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 670, 340);
+        jLabel1.setBounds(0, 0, 660, 320);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -123,9 +127,15 @@ public class accountLoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_signInButton1ActionPerformed
 
     private void createNewAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewAccountButtonActionPerformed
-        systemExit();
-        accountCreatorGUI creator = new accountCreatorGUI();
+        try {
+            systemExit();
+            accountCreatorGUI creator = new accountCreatorGUI();
             creator.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(accountLoginGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(accountLoginGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_createNewAccountButtonActionPerformed
 
     /**

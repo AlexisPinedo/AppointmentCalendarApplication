@@ -6,24 +6,25 @@
 package appointmentcalendar;
 import java.sql.SQLException;
 import java.awt.event.WindowEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
-import java.util.UUID;
-/**
- *
- * @author Pir8
- */
-
-   // JDBC driver name and database URL
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class accountCreatorGUI extends javax.swing.JFrame {
-    
-    //String id = String.format("%06d", rand.nextInt(10000));
+    String sql;
+    AccountSQLHelper helper;
+    Random rand = new Random();
     /**
      * Creates new form accountCreator
      */
-    public accountCreatorGUI()
+    public accountCreatorGUI() throws ClassNotFoundException, SQLException
     {
         initComponents();
+        sql = null;
+        helper = new AccountSQLHelper();
     }
     
     /**
@@ -44,6 +45,8 @@ public class accountCreatorGUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         patientFirstName = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        birthDate = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +77,11 @@ public class accountCreatorGUI extends javax.swing.JFrame {
         jLabel5.setText("FIRST NAME");
         jLabel5.setToolTipText("");
 
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("DATE OF BIRTH (YYYY-MM-DD)");
+        jLabel6.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,29 +92,34 @@ public class accountCreatorGUI extends javax.swing.JFrame {
                 .addGap(245, 245, 245))
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(passTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
-                        .addComponent(mailTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(patientLastName)
-                        .addComponent(patientFirstName)))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
+                    .addComponent(mailTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(patientLastName)
+                    .addComponent(patientFirstName)
+                    .addComponent(birthDate)
+                    .addComponent(jLabel6))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(74, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(patientFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(patientLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(birthDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -127,34 +140,22 @@ public class accountCreatorGUI extends javax.swing.JFrame {
     {
         WindowEvent winClosing = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
     }
-        
+    
     private void createAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountActionPerformed
-        String []values = new String[6];
-        try
-        {
-            String sql = "INSERT INTO Patients VALUES(?,?,?,?,?,?)";
-            PreparedStatement statement = conn.prepareStatement(sql);
-
-            statement.clearParameters();
-            statement.setString(1,values[4]);
-            statement.setString(2,values[0]);
-            statement.setString(3,values[3]);
-            statement.setInt(4,Integer.parseInt(values[1]));
-            statement.setInt(5,Integer.parseInt(values[2]));
-
-            statement.executeUpdate();
-        }
-        catch(SQLException se)
-        {
-
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-        
-        accountLoginGUI mainPage = new accountLoginGUI();
-        mainPage.setVisible(true);
+        String accountInsert[] = new String[6];
+        String patientID = String.format("%06d", rand.nextInt(1000000));
+        accountInsert[0] = patientID;
+        String firstName = patientFirstName.getText();
+        accountInsert[1] = firstName;
+        String lastName = patientLastName.getText();
+        accountInsert[2] = lastName;
+        String birthDay = birthDate.getText();
+        accountInsert[3] = birthDay;
+        String email = mailTxt.getText();
+        accountInsert[4] = email;
+        String password = passTxt.getText();
+        accountInsert[5] = password;
+        helper.Insert(accountInsert);
         systemExit();
     }//GEN-LAST:event_createAccountActionPerformed
 
@@ -189,18 +190,26 @@ public class accountCreatorGUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        public void run() {
+            try {
                 new accountCreatorGUI().setVisible(true);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(accountCreatorGUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(accountCreatorGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField birthDate;
     private javax.swing.JButton createAccount;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField mailTxt;
     private javax.swing.JTextField passTxt;
     private javax.swing.JTextField patientFirstName;

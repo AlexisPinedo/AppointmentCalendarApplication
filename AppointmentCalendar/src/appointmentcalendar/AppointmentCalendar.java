@@ -16,7 +16,7 @@ public class AppointmentCalendar {
      */
     public static void main(String[] args)
     {
-        // TODO code application logic here
-    }
-    
+        accountLoginGUI logger = new accountLoginGUI();
+        logger.setVisible(true);
+    }   
 }
