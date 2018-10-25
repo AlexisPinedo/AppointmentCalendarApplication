@@ -216,9 +216,9 @@ public class AccountSQLHelper
                  {
                     hID = rs.getString("hID");
                     hospitalName = rs.getString("hospitalName");
-                    hospitalAddress = rs.getString("publisherAddress");
-                    hospitalPhone  = rs.getString("publisherPhone");
-                    hospitalEmail  = rs.getString("publisherEmail");
+                    hospitalAddress = rs.getString("hospitalAddress");
+                    hospitalPhone  = rs.getString("hospitalPhone");
+                    hospitalEmail  = rs.getString("hospitalEmail");
                     assignedDoctor = rs.getString("assignedDoctor");
                     appointmentDate = rs.getString("assignmentDate");
                  }
