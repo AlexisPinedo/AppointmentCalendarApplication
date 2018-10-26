@@ -148,7 +148,10 @@ public class accountLoginGUI extends javax.swing.JFrame {
             
             if(rs.next())
             {
-                JOptionPane.showMessageDialog(null, "Account succesfully created");
+                JOptionPane.showMessageDialog(null, "Sign In Successful!");
+                systemExit();
+                CalendarGUI calendar = new CalendarGUI();
+                calendar.setVisible(true);
             }
             
             else{

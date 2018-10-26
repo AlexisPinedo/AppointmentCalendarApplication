@@ -169,6 +169,10 @@ public class accountCreatorGUI extends javax.swing.JFrame {
             statement.setString(6,passTxt.getText());     
             statement.executeUpdate();
             
+            systemExit();
+            CalendarGUI calendar = new CalendarGUI();
+            calendar.setVisible(true);
+            
       
         }catch(SQLException se)
         {
@@ -213,7 +217,7 @@ public class accountCreatorGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {
-                new accountCreatorGUI().setVisible(true);
+            new accountCreatorGUI().setVisible(true);
         }
         });
     }
