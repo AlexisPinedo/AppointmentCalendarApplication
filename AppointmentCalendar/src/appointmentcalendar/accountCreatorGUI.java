@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package appointmentcalendar;
+import java.awt.Toolkit;
+import java.awt.*;
 import java.sql.SQLException;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
@@ -16,17 +18,7 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 public class accountCreatorGUI extends javax.swing.JFrame {
-    
-    static final String JDBC_DRIVER = "org.apache.derby.jdbc.ClientDriver";
-    static final String DB_URL = "jdbc:derby://localhost:1527/343Project1testdb";
-
-  //  Database credentials
-    static final String USER = "newuser";
-    static final String PASS = "newpass";
-    public Connection conn;
-    public Statement stmt; 
-    Random rand = new Random();
-    /**
+   /**
      * Creates new form accountCreator
      */
     public accountCreatorGUI() 
@@ -57,7 +49,7 @@ public class accountCreatorGUI extends javax.swing.JFrame {
         birthDate = new javax.swing.JTextField();
         passTxt = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -150,15 +142,17 @@ public class accountCreatorGUI extends javax.swing.JFrame {
     private void systemExit()
     {
         WindowEvent winClosing = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosing);
     }
     
     private void createAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountActionPerformed
-
         try{
-            Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            String url = "jdbc:derby://localhost:1527/343Project1testdb;newuser;newpass";
+            Connection conn = DriverManager.getConnection(url);
             String sql = "INSERT INTO Patients VALUES(?,?,?,?,?,?)";
             PreparedStatement statement = conn.prepareStatement(sql);
+            Random rand = new Random();
             
             statement.clearParameters();
             statement.setString(1,String.format("%06d", rand.nextInt(1000000)));
@@ -170,8 +164,9 @@ public class accountCreatorGUI extends javax.swing.JFrame {
             statement.executeUpdate();
             
             systemExit();
-            CalendarGUI calendar = new CalendarGUI();
-            calendar.setVisible(true);
+            accountLoginGUI login = new accountLoginGUI();
+            login.setVisible(true);
+            
             
       
         }catch(SQLException se)
@@ -181,7 +176,7 @@ public class accountCreatorGUI extends javax.swing.JFrame {
         
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null, e);
+            e.printStackTrace();
         }
     }//GEN-LAST:event_createAccountActionPerformed
 
@@ -236,12 +231,3 @@ public class accountCreatorGUI extends javax.swing.JFrame {
     private javax.swing.JTextField patientLastName;
     // End of variables declaration//GEN-END:variables
 }
-//        String accountInsert[] = new String[6];
-//        accountInsert[0] = String.format("%06d", rand.nextInt(1000000));
-//        accountInsert[1] = patientFirstName.getText();
-//        accountInsert[2] = patientLastName.getText();
-//        accountInsert[3] = birthDate.getText();
-//        accountInsert[4] = mailTxt.getText();
-//        accountInsert[5] = passTxt.getText();
-//        helper.Insert(accountInsert);
-//        systemExit();
