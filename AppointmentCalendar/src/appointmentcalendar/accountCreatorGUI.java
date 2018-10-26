@@ -6,25 +6,34 @@
 package appointmentcalendar;
 import java.sql.SQLException;
 import java.awt.event.WindowEvent;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class accountCreatorGUI extends javax.swing.JFrame {
-    String sql;
-    AccountSQLHelper helper;
+    
+    static final String JDBC_DRIVER = "org.apache.derby.jdbc.ClientDriver";
+    static final String DB_URL = "jdbc:derby://localhost:1527/343Project1testdb";
+
+  //  Database credentials
+    static final String USER = "newuser";
+    static final String PASS = "newpass";
+    public Connection conn;
+    public Statement stmt; 
     Random rand = new Random();
     /**
      * Creates new form accountCreator
      */
-    public accountCreatorGUI() throws ClassNotFoundException, SQLException
+    public accountCreatorGUI() 
     {
         initComponents();
-        sql = null;
-        helper = new AccountSQLHelper();
+//        sql = null;
+//        helper = new AccountSQLHelper();
     }
     
     /**
@@ -39,7 +48,6 @@ public class accountCreatorGUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         mailTxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        passTxt = new javax.swing.JTextField();
         createAccount = new javax.swing.JButton();
         patientLastName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -47,6 +55,7 @@ public class accountCreatorGUI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         birthDate = new javax.swing.JTextField();
+        passTxt = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,24 +95,26 @@ public class accountCreatorGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 264, Short.MAX_VALUE)
-                .addComponent(createAccount)
-                .addGap(245, 245, 245))
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
-                    .addComponent(mailTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(patientLastName)
-                    .addComponent(patientFirstName)
-                    .addComponent(birthDate)
-                    .addComponent(jLabel6))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 218, Short.MAX_VALUE)
+                        .addComponent(createAccount)
+                        .addGap(245, 245, 245))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mailTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(patientLastName)
+                            .addComponent(patientFirstName)
+                            .addComponent(birthDate)
+                            .addComponent(jLabel6)
+                            .addComponent(passTxt))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,8 +138,8 @@ public class accountCreatorGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(passTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addComponent(passTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addComponent(createAccount)
                 .addGap(39, 39, 39))
         );
@@ -142,21 +153,32 @@ public class accountCreatorGUI extends javax.swing.JFrame {
     }
     
     private void createAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountActionPerformed
-        String accountInsert[] = new String[6];
-        String patientID = String.format("%06d", rand.nextInt(1000000));
-        accountInsert[0] = patientID;
-        String firstName = patientFirstName.getText();
-        accountInsert[1] = firstName;
-        String lastName = patientLastName.getText();
-        accountInsert[2] = lastName;
-        String birthDay = birthDate.getText();
-        accountInsert[3] = birthDay;
-        String email = mailTxt.getText();
-        accountInsert[4] = email;
-        String password = passTxt.getText();
-        accountInsert[5] = password;
-        helper.Insert(accountInsert);
-        systemExit();
+
+        try{
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            String sql = "INSERT INTO Patients VALUES(?,?,?,?,?,?)";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            
+            statement.clearParameters();
+            statement.setString(1,String.format("%06d", rand.nextInt(1000000)));
+            statement.setString(2,patientFirstName.getText());
+            statement.setString(3,patientLastName.getText());
+            statement.setString(4,birthDate.getText());
+            statement.setString(5,mailTxt.getText());
+            statement.setString(6,passTxt.getText());     
+            statement.executeUpdate();
+            
+      
+        }catch(SQLException se)
+        {
+               
+        }
+        
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }//GEN-LAST:event_createAccountActionPerformed
 
     
@@ -191,13 +213,7 @@ public class accountCreatorGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {
-            try {
                 new accountCreatorGUI().setVisible(true);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(accountCreatorGUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(accountCreatorGUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
         });
     }
@@ -211,8 +227,17 @@ public class accountCreatorGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField mailTxt;
-    private javax.swing.JTextField passTxt;
+    private javax.swing.JPasswordField passTxt;
     private javax.swing.JTextField patientFirstName;
     private javax.swing.JTextField patientLastName;
     // End of variables declaration//GEN-END:variables
 }
+//        String accountInsert[] = new String[6];
+//        accountInsert[0] = String.format("%06d", rand.nextInt(1000000));
+//        accountInsert[1] = patientFirstName.getText();
+//        accountInsert[2] = patientLastName.getText();
+//        accountInsert[3] = birthDate.getText();
+//        accountInsert[4] = mailTxt.getText();
+//        accountInsert[5] = passTxt.getText();
+//        helper.Insert(accountInsert);
+//        systemExit();

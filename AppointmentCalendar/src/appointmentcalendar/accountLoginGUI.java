@@ -5,15 +5,28 @@
  */
 package appointmentcalendar;
 import java.util.Scanner;
-import appointmentcalendar.accountCreatorGUI;
 import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 public class accountLoginGUI extends javax.swing.JFrame {
 
+    static final String JDBC_DRIVER = "org.apache.derby.jdbc.ClientDriver";
+    static final String DB_URL = "jdbc:derby://localhost:1527/343Project1testdb";
+
+  //  Database credentials
+    static final String USER = "newuser";
+    static final String PASS = "newpass";
+    public Connection conn;
+    public Statement stmt; 
     /**
      * Creates new form accountLogin
      */
@@ -36,23 +49,23 @@ public class accountLoginGUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         emailText = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        passwordText = new javax.swing.JTextField();
         exitButton = new javax.swing.JButton();
         createNewAccountButton = new javax.swing.JButton();
         signInButton1 = new javax.swing.JButton();
+        passwordText = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         theAppointmentSchedulerTitle.setFont(new java.awt.Font("Copperplate", 0, 24)); // NOI18N
-        theAppointmentSchedulerTitle.setForeground(new java.awt.Color(0, 0, 0));
+        theAppointmentSchedulerTitle.setForeground(new java.awt.Color(255, 255, 255));
         theAppointmentSchedulerTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         theAppointmentSchedulerTitle.setText("THE APPOINTMENT SCHEDULER");
         getContentPane().add(theAppointmentSchedulerTitle);
         theAppointmentSchedulerTitle.setBounds(135, 18, 405, 58);
 
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("EMAIL ADDRESS");
         jLabel2.setToolTipText("");
@@ -63,17 +76,14 @@ public class accountLoginGUI extends javax.swing.JFrame {
         getContentPane().add(emailText);
         emailText.setBounds(147, 104, 357, 24);
 
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("PASSWORD");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(155, 148, 69, 16);
 
-        passwordText.setToolTipText("");
-        getContentPane().add(passwordText);
-        passwordText.setBounds(147, 170, 357, 24);
-
-        exitButton.setForeground(new java.awt.Color(255, 255, 255));
+        exitButton.setBackground(new java.awt.Color(255, 255, 0));
+        exitButton.setForeground(new java.awt.Color(255, 0, 51));
         exitButton.setText("EXIT");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,7 +93,8 @@ public class accountLoginGUI extends javax.swing.JFrame {
         getContentPane().add(exitButton);
         exitButton.setBounds(460, 250, 78, 32);
 
-        createNewAccountButton.setForeground(new java.awt.Color(255, 255, 255));
+        createNewAccountButton.setBackground(new java.awt.Color(255, 255, 0));
+        createNewAccountButton.setForeground(new java.awt.Color(255, 0, 51));
         createNewAccountButton.setText("CREATE A NEW ACCOUNT");
         createNewAccountButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,7 +104,8 @@ public class accountLoginGUI extends javax.swing.JFrame {
         getContentPane().add(createNewAccountButton);
         createNewAccountButton.setBounds(100, 250, 191, 32);
 
-        signInButton1.setForeground(new java.awt.Color(255, 255, 255));
+        signInButton1.setBackground(new java.awt.Color(255, 255, 51));
+        signInButton1.setForeground(new java.awt.Color(204, 0, 51));
         signInButton1.setText("SIGN IN");
         signInButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,11 +114,12 @@ public class accountLoginGUI extends javax.swing.JFrame {
         });
         getContentPane().add(signInButton1);
         signInButton1.setBounds(330, 250, 78, 32);
+        getContentPane().add(passwordText);
+        passwordText.setBounds(150, 170, 350, 22);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appointmentcalendar/IMG_0134.JPG"))); // NOI18N
-        jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 660, 320);
+        jLabel1.setBounds(-1150, -320, 1820, 790);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -121,21 +134,41 @@ public class accountLoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void signInButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButton1ActionPerformed
-        String email = emailText.getText();
-        String password = passwordText.getText();     
+
+        try{
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            String sql = "SELECT * FROM Patients WHERE pEmail = ? AND password = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            
+            statement.clearParameters();
+            statement.setString(1,emailText.getText());
+            statement.setString(2,passwordText.getText());   
+            ResultSet rs = statement.executeQuery();
+            
+            if(rs.next())
+            {
+                JOptionPane.showMessageDialog(null, "Account succesfully created");
+            }
+            
+            else{
+                JOptionPane.showMessageDialog(null, "Cannot Create Account");
+                emailText.setText("");
+                passwordText.setText("");
+            }
+            conn.close();
+      
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e);
+        }    
         
     }//GEN-LAST:event_signInButton1ActionPerformed
 
     private void createNewAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewAccountButtonActionPerformed
-        try {
             systemExit();
             accountCreatorGUI creator = new accountCreatorGUI();
             creator.setVisible(true);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(accountLoginGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(accountLoginGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_createNewAccountButtonActionPerformed
 
     /**
@@ -181,7 +214,7 @@ public class accountLoginGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField passwordText;
+    private javax.swing.JPasswordField passwordText;
     private javax.swing.JButton signInButton1;
     private javax.swing.JLabel theAppointmentSchedulerTitle;
     // End of variables declaration//GEN-END:variables
