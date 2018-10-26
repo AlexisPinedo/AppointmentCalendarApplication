@@ -17,7 +17,8 @@ import javax.swing.SpinnerDateModel;
 public class CalendarGUI extends javax.swing.JFrame {
     
     Date SelectedDate;
-
+    String selectedDateString;
+    String selectedTimeString; 
     /**
      * Creates new form CalendarGUI
      */
@@ -39,6 +40,7 @@ public class CalendarGUI extends javax.swing.JFrame {
         dateChooserDialog1 = new datechooser.beans.DateChooserDialog();
         dateChooserDialog2 = new datechooser.beans.DateChooserDialog();
         dateChooserDialog3 = new datechooser.beans.DateChooserDialog();
+        jMenu1 = new javax.swing.JMenu();
         AppointmentCalendarTitleLabel = new javax.swing.JLabel();
         SelectedAppointmentInformationLabel = new javax.swing.JLabel();
         createAppointmentButton = new javax.swing.JButton();
@@ -56,7 +58,12 @@ public class CalendarGUI extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         quitButton = new javax.swing.JButton();
-        dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        appointmentLabel = new java.awt.Label();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,7 +94,7 @@ public class CalendarGUI extends javax.swing.JFrame {
             }
         });
 
-        JSpinner.DateEditor de = new JSpinner.DateEditor(TimeSpinner, "HH:mm:ss");
+        JSpinner.DateEditor de = new JSpinner.DateEditor(TimeSpinner, "HH:mm");
         TimeSpinner.setEditor(de);
 
         viewAppointmentButton.setText("View Appointment");
@@ -110,6 +117,16 @@ public class CalendarGUI extends javax.swing.JFrame {
             }
         });
 
+        appointmentLabel.setText("Appointment Time");
+
+        jMenu2.setText("File");
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Edit");
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,37 +135,33 @@ public class CalendarGUI extends javax.swing.JFrame {
                 .addComponent(AppointmentCalendarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(AppointmentCalendarTitleLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(93, 93, 93)
-                                .addComponent(AppointmentCalendarTitleLabel))
+                                .addComponent(deleteAppointmentButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(editAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(SelectedAppointmentInformationLabel)
-                                    .addComponent(TimeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(newAppointmentInfoLabel)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane2)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(deleteAppointmentButton)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(editAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(createAppointmentButton)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(viewAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(132, 132, 132)
-                                .addComponent(quitButton)))
-                        .addContainerGap(121, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75))))
+                                .addComponent(createAppointmentButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(viewAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addComponent(quitButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(appointmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(SelectedAppointmentInformationLabel)
+                                .addComponent(TimeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(newAppointmentInfoLabel)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2)))))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,9 +172,9 @@ public class CalendarGUI extends javax.swing.JFrame {
                 .addComponent(SelectedAppointmentInformationLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
+                .addGap(48, 48, 48)
+                .addComponent(appointmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
                 .addComponent(TimeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(newAppointmentInfoLabel)
@@ -175,7 +188,7 @@ public class CalendarGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteAppointmentButton)
                     .addComponent(editAppointmentButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(quitButton)
                 .addContainerGap())
             .addComponent(AppointmentCalendarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -200,9 +213,10 @@ public class CalendarGUI extends javax.swing.JFrame {
     private void AppointmentCalendarPanelOnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_AppointmentCalendarPanelOnSelectionChange
         // TODO add your handling code here:
         Calendar selectedDate = AppointmentCalendarPanel.getSelectedDate();
-        
-        jTextArea2.setText("The Date is \n" + (selectedDate.get(Calendar.MONTH)+1) + "-" +
-                selectedDate.get(Calendar.DATE) + "-" + selectedDate.get(Calendar.YEAR));
+        selectedDateString =  selectedDate.get(Calendar.YEAR) + "-" +
+               (selectedDate.get(Calendar.MONTH)+1)  + "-" + selectedDate.get(Calendar.DATE);
+        //selectedTimeString = TimeSpinner.getValue();
+        jTextArea2.setText("The Date is \n" + selectedDateString);
     }//GEN-LAST:event_AppointmentCalendarPanelOnSelectionChange
 
     /**
@@ -245,13 +259,17 @@ public class CalendarGUI extends javax.swing.JFrame {
     private javax.swing.JLabel AppointmentCalendarTitleLabel;
     private javax.swing.JLabel SelectedAppointmentInformationLabel;
     private javax.swing.JSpinner TimeSpinner;
+    private java.awt.Label appointmentLabel;
     private javax.swing.JButton createAppointmentButton;
-    private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private datechooser.beans.DateChooserDialog dateChooserDialog1;
     private datechooser.beans.DateChooserDialog dateChooserDialog2;
     private datechooser.beans.DateChooserDialog dateChooserDialog3;
     private javax.swing.JButton deleteAppointmentButton;
     private javax.swing.JButton editAppointmentButton;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea2;

@@ -8,11 +8,35 @@
     </Component>
     <Component class="datechooser.beans.DateChooserDialog" name="dateChooserDialog3">
     </Component>
+    <Container class="javax.swing.JMenu" name="jMenu1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jMenu1"/>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+    </Container>
+    <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="jMenu2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="File"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Edit"/>
+          </Properties>
+        </Menu>
+      </SubComponents>
+    </Menu>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
   <SyntheticProperties>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
@@ -34,50 +58,44 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="AppointmentCalendarPanel" min="-2" pref="707" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                      <Component id="AppointmentCalendarTitleLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                              <Component id="AppointmentCalendarTitleLabel" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="deleteAppointmentButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="editAppointmentButton" min="-2" pref="145" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="SelectedAppointmentInformationLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TimeSpinner" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
-                                  <Component id="newAppointmentInfoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane1" alignment="0" pref="277" max="32767" attributes="0"/>
-                                  <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="deleteAppointmentButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="editAppointmentButton" min="-2" pref="145" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="createAppointmentButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="viewAppointmentButton" min="-2" pref="145" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
-                              <Component id="quitButton" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="createAppointmentButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="viewAppointmentButton" min="-2" pref="145" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="121" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="dateChooserCombo1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="quitButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="appointmentLabel" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="SelectedAppointmentInformationLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="TimeSpinner" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                              <Component id="newAppointmentInfoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" alignment="0" pref="277" max="32767" attributes="0"/>
+                              <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
+              <EmptySpace pref="121" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -90,9 +108,9 @@
               <Component id="SelectedAppointmentInformationLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-              <Component id="dateChooserCombo1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+              <Component id="appointmentLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
               <Component id="TimeSpinner" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="newAppointmentInfoLabel" min="-2" max="-2" attributes="0"/>
@@ -108,7 +126,7 @@
                   <Component id="deleteAppointmentButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="editAppointmentButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="21" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="quitButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -162,7 +180,7 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner(sm)"/>
         <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="Date date = new Date();&#xa;  SpinnerDateModel sm = &#xa;  new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY);"/>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="JSpinner.DateEditor de = new JSpinner.DateEditor(TimeSpinner, &quot;HH:mm:ss&quot;);&#xa;TimeSpinner.setEditor(de);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="JSpinner.DateEditor de = new JSpinner.DateEditor(TimeSpinner, &quot;HH:mm&quot;);&#xa;TimeSpinner.setEditor(de);"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="viewAppointmentButton">
@@ -214,7 +232,10 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quitButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="datechooser.beans.DateChooserCombo" name="dateChooserCombo1">
+    <Component class="java.awt.Label" name="appointmentLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Appointment Time"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
