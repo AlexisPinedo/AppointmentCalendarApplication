@@ -7,8 +7,10 @@ package appointmentcalendar;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.io.FileWriter;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
+
 
 /**
  *
@@ -60,8 +62,8 @@ public class CalendarGUI extends javax.swing.JFrame {
         quitButton = new javax.swing.JButton();
         appointmentLabel = new java.awt.Label();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuFile = new javax.swing.JMenu();
+        jMenuEdit = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
 
@@ -119,11 +121,11 @@ public class CalendarGUI extends javax.swing.JFrame {
 
         appointmentLabel.setText("Appointment Time");
 
-        jMenu2.setText("File");
-        jMenuBar1.add(jMenu2);
+        jMenuFile.setText("File");
+        jMenuBar1.add(jMenuFile);
 
-        jMenu3.setText("Edit");
-        jMenuBar1.add(jMenu3);
+        jMenuEdit.setText("Edit");
+        jMenuBar1.add(jMenuEdit);
 
         setJMenuBar(jMenuBar1);
 
@@ -267,9 +269,9 @@ public class CalendarGUI extends javax.swing.JFrame {
     private javax.swing.JButton deleteAppointmentButton;
     private javax.swing.JButton editAppointmentButton;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuEdit;
+    private javax.swing.JMenu jMenuFile;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea2;

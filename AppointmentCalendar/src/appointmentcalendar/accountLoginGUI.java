@@ -155,7 +155,7 @@ public class accountLoginGUI extends javax.swing.JFrame {
             }
             
             else{
-                JOptionPane.showMessageDialog(null, "Cannot Create Account");
+                JOptionPane.showMessageDialog(null, "Invalid Sign-In Information! Try Again");
                 emailText.setText("");
                 passwordText.setText("");
             }

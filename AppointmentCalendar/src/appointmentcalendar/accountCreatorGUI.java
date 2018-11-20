@@ -21,6 +21,16 @@ public class accountCreatorGUI extends javax.swing.JFrame {
    /**
      * Creates new form accountCreator
      */
+            
+    static final String JDBC_DRIVER = "org.apache.derby.jdbc.ClientDriver";
+    static final String DB_URL = "jdbc:derby://localhost:1527/343Project1testdb";
+
+  //  Database credentials
+    static final String USER = "newuser";
+    static final String PASS = "newpass";
+    public Connection conn;
+    public Statement stmt; 
+    
     public accountCreatorGUI() 
     {
         initComponents();
@@ -145,39 +155,52 @@ public class accountCreatorGUI extends javax.swing.JFrame {
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosing);
     }
     
-    private void createAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountActionPerformed
+    private static int generateID()
+    {
+        Random rand = new Random();
+        return 100000 + rand.nextInt(900000);
+    }
+    
+    private void insertPatient() throws SQLException
+    {
         try{
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-            String url = "jdbc:derby://localhost:1527/343Project1testdb;newuser;newpass";
-            Connection conn = DriverManager.getConnection(url);
-            String sql = "INSERT INTO Patients VALUES(?,?,?,?,?,?)";
-            PreparedStatement statement = conn.prepareStatement(sql);
-            Random rand = new Random();
-            
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            String sql = "INSERT INTO Patients (pID, pFname, pLname, pDOB, pEmail, password)"
+                        + "VALUES(?,?,?,?,?,?)";
+            int idNum = generateID();  
+            PreparedStatement statement = conn.prepareStatement(sql);      
+
             statement.clearParameters();
-            statement.setString(1,String.format("%06d", rand.nextInt(1000000)));
+            statement.setInt(1,idNum);
             statement.setString(2,patientFirstName.getText());
             statement.setString(3,patientLastName.getText());
             statement.setString(4,birthDate.getText());
             statement.setString(5,mailTxt.getText());
-            statement.setString(6,passTxt.getText());     
+            statement.setString(6,passTxt.getText()); 
             statement.executeUpdate();
-            
-            systemExit();
-            accountLoginGUI login = new accountLoginGUI();
-            login.setVisible(true);
-            
-            
-      
-        }catch(SQLException se)
-        {
-               
-        }
-        
-        catch(Exception e)
+            System.out.println("You Have Successfully Registered!");
+            conn.close();
+        }catch(Exception e)
         {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Invalid Sign-Up Information! Try Again");
+        } 
+    }
+    
+    private void createAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountActionPerformed
+        try
+        {
+            insertPatient();
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Invalid Sign-Up Information! Try Again");
         }
+        
+        systemExit();
+        accountLoginGUI login = new accountLoginGUI();
+        login.setVisible(true);
     }//GEN-LAST:event_createAccountActionPerformed
 
     
