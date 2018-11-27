@@ -122,6 +122,11 @@ public class CalendarGUI extends javax.swing.JFrame {
         appointmentLabel.setText("Appointment Time");
 
         jMenuFile.setText("File");
+        jMenuFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFileActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jMenuFile);
 
         jMenuEdit.setText("Edit");
@@ -220,6 +225,10 @@ public class CalendarGUI extends javax.swing.JFrame {
         //selectedTimeString = TimeSpinner.getValue();
         jTextArea2.setText("The Date is \n" + selectedDateString);
     }//GEN-LAST:event_AppointmentCalendarPanelOnSelectionChange
+
+    private void jMenuFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuFileActionPerformed
 
     /**
      * @param args the command line arguments
