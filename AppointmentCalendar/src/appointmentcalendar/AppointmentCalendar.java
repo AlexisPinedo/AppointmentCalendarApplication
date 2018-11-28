@@ -10,7 +10,6 @@ package appointmentcalendar;
  * @author pined
  */
 public class AppointmentCalendar {
-
     /**
      * @param args the command line arguments
      */

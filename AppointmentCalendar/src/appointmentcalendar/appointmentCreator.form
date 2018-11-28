@@ -29,16 +29,18 @@
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabel1" pref="189" max="32767" attributes="0"/>
-                              <Component id="jComboBox1" max="32767" attributes="0"/>
+                              <Component id="jLabel1" max="32767" attributes="0"/>
+                              <Component id="hospitalComboBox" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jLabel2" min="-2" pref="239" max="-2" attributes="0"/>
-                          <Component id="jComboBox2" alignment="0" min="-2" pref="181" max="-2" attributes="0"/>
+                          <Component id="locationComboBox" alignment="0" min="-2" pref="181" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
+                          <Component id="timeComboBox" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="confirmAppointmentButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="177" max="32767" attributes="0"/>
@@ -51,13 +53,17 @@
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="27" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <Component id="hospitalComboBox" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" pref="28" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jComboBox2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="146" max="32767" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Component id="locationComboBox" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jLabel3" min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="timeComboBox" min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace pref="83" max="32767" attributes="0"/>
+              <Component id="confirmAppointmentButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -69,14 +75,11 @@
         <Property name="text" type="java.lang.String" value="SELECT AN HOSPITAL"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="hospitalComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="1">
+            <StringItem index="0" value="Kaiser Permanente"/>
           </StringArray>
         </Property>
       </Properties>
@@ -86,17 +89,18 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="SELECT THE ADDRESS BELOW"/>
+        <Property name="text" type="java.lang.String" value="SELECT THE LOCATION OF THE HOSPITAL"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox2">
+    <Component class="javax.swing.JComboBox" name="locationComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="5">
+            <StringItem index="0" value="3401 S Harbor Blvd, Santa Ana, CA"/>
+            <StringItem index="1" value="3717 S Euclid St, Garden Grove, CA"/>
+            <StringItem index="2" value="5451 S Chapman Ave, Orange, CA"/>
+            <StringItem index="3" value="506 S Beach Blvd, Huntington Beach, CA"/>
+            <StringItem index="4" value="2523 S La Palma Ave, Anaheim, CA"/>
           </StringArray>
         </Property>
       </Properties>
@@ -104,10 +108,51 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="confirmAppointmentButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="CONFIRM APPOINTMENT"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirmAppointmentButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="SELECT THE TIME"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="timeComboBox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="22">
+            <StringItem index="0" value="08:00"/>
+            <StringItem index="1" value="08:30"/>
+            <StringItem index="2" value="09:00"/>
+            <StringItem index="3" value="09:30"/>
+            <StringItem index="4" value="10:00"/>
+            <StringItem index="5" value="10:30"/>
+            <StringItem index="6" value="11:00"/>
+            <StringItem index="7" value="11:30"/>
+            <StringItem index="8" value="12:00"/>
+            <StringItem index="9" value="12:30"/>
+            <StringItem index="10" value="13:00"/>
+            <StringItem index="11" value="13:30"/>
+            <StringItem index="12" value="14:00"/>
+            <StringItem index="13" value="14:30"/>
+            <StringItem index="14" value="15:30"/>
+            <StringItem index="15" value="16:00"/>
+            <StringItem index="16" value="16:30"/>
+            <StringItem index="17" value="17:00"/>
+            <StringItem index="18" value="17:30"/>
+            <StringItem index="19" value="18:00"/>
+            <StringItem index="20" value="18:30"/>
+            <StringItem index="21" value="19:00"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
