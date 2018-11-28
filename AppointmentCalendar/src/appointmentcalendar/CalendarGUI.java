@@ -6,8 +6,10 @@
 package appointmentcalendar;
 
 import static appointmentcalendar.accountLoginGUI.JDBC_DRIVER;
+import com.opencsv.CSVWriter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -311,14 +313,21 @@ public class CalendarGUI extends javax.swing.JFrame {
 
     private void exportFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportFileButtonActionPerformed
         // TODO add your handling code here:
-        CSVWriter writer = new CSVWriter(new FileWriter("Appointments.csv"), '\t');
-        Boolean includeHeaders = true;
+        CSVWriter writer;
+        
+        try {
+            writer = new CSVWriter(new FileWriter("Appointments.csv"), '\t');
+            Boolean includeHeaders = true;
 
-        java.sql.ResultSet myResultSet = .... //your resultset logic here
+            //java.sql.ResultSet myResultSet = .... //your resultset logic here
 
-        writer.writeAll(myResultSet, includeHeaders);
+            //writer.writeAll(myResultSet, includeHeaders);
 
         writer.close();
+        } catch (IOException ex) {
+            Logger.getLogger(CalendarGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_exportFileButtonActionPerformed
 
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
