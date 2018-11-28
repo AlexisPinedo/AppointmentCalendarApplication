@@ -175,13 +175,13 @@ public class appointmentCreator extends javax.swing.JFrame {
             PreparedStatement statement = conn.prepareStatement(sql);      
 
             statement.clearParameters();
-            statement.setInt(1,idNum);
-            statement.setString(2,patientFirstName.getText());
-            statement.setString(3,patientLastName.getText());
-            statement.setString(4,birthDate.getText());
+            statement.setInt(1,getPatientID());
+            statement.setString(2,getFirstName());
+            statement.setString(3,getLastName());
+            statement.setString(4,getHospitalID());
             statement.setString(5,hospitalComboBox.getSelectedItem().toString());
             statement.setString(6,locationComboBox.getSelectedItem().toString()); 
-            statement.setString(7,birthDate.getText());
+            statement.setString(7,getDoctorID());
             statement.setString(8,getDoctor());
             statement.setString(9,timeComboBox.getSelectedItem().toString()); 
             statement.executeUpdate();
