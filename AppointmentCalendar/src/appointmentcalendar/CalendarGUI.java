@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
@@ -415,9 +416,9 @@ public class CalendarGUI extends javax.swing.JFrame {
     }
     
     String GetTimeString(){
-        Calendar selectedDate = AppointmentCalendarPanel.getSelectedDate();
-        selectedDate.setTime((Date)TimeSpinner.getValue());
-        selectedTimeString = String.format("%02d:%02d", Calendar.HOUR_OF_DAY, selectedDate.get(Calendar.MINUTE) );
+        Calendar selectedTime = AppointmentCalendarPanel.getSelectedDate();
+        selectedTime.setTime((Date)TimeSpinner.getValue());
+        selectedTimeString = String.format("%02d:%02d", selectedTime.get(Calendar.HOUR_OF_DAY), selectedTime.get(Calendar.MINUTE) );
         return selectedTimeString;
     }
     
@@ -428,23 +429,21 @@ public class CalendarGUI extends javax.swing.JFrame {
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             selectedDateString = GetDateString();
+            System.out.print(selectedDateString + "\n");
             selectedTimeString = GetTimeString();
+            System.out.print(selectedTimeString+"\n");
 
-            //String sql = "SELECT * FROM APPOINTMENTS WHERE APPOINTMENTSTARTTIME = " + selectedDateString + " " + selectedTimeString ;
-            //String sql = "SELECT PID FROM APPOINTMENTS WHERE APPOINTMENTSTARTTIME = ?";
-            //System.out.print("sql string stored");
-            //PreparedStatement statement = conn.prepareStatement(sql);
-            //statement.clearParameters();
-            //statement.setString(1, selectedDateString + " " + selectedTimeString);
+            String sql = "SELECT * FROM APPOINTMENTS WHERE APPOINTMENTSTARTTIME = '" + selectedDateString + "' '" + selectedTimeString + "' " ;
+            System.out.print("sql string stored\n");
             
-            String sql = "SELECT * FROM APPOINTMENTS";
-            Statement statement = conn.createStatement();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.clearParameters();
+            
             System.out.print("Statement exectued\n");
-            ResultSet rs = statement.executeQuery(sql);
+            ResultSet rs = statement.executeQuery();
             String getData = "";
-            int i = 0;
             while(rs.next()){
-                getData = getData + " " + rs.getString(9);
+                getData = getData + " " + rs.getString("APPOINTMENTSTARTTIME");
             }
             System.out.print("Statement executed and stored into rs\n");
             appointmentInfo = getData;
