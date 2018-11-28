@@ -130,36 +130,34 @@ public class appointmentCreator extends javax.swing.JFrame {
         
     private String getDoctor() throws SQLException
     {
-        try
-        {
+        String doctorName = "";
+        try{
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
-            String doctorNameSQL = "Select doctorName FROM Appointments "
-                    + "WHERE appointmentDateTime = ? OR hospitalAddress = ?";
-            PreparedStatement statement = conn.prepareStatement(doctorNameSQL);
-                          
-            statement.clearParameters();
-            statement.setString(1,hospitalComboBox.getSelectedItem().toString());
-            statement.setString(2,locationComboBox.getSelectedItem().toString());   
+
+            String appointmentDate = timeComboBox.getSelectedItem().toString();
+            String hospitalLocation = locationComboBox.getSelectedItem().toString();
+
+            String sql = "SELECT doctorName FROM Appointments WHERE appointmentDateTime = '" + appointmentDate + "OR hospitalAddress = '" + hospitalLocation ;
+            
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.clearParameters();           
+            System.out.print("Statement exectued\n");
             ResultSet rs = statement.executeQuery();
-            
-            String doctorName = null;
-            if(rs.next())
-            {
-                doctorName = rs.getString(1);
-                doctorName = rs.getString(2);
+            String getData = "";
+            while(rs.next()){
+                getData = getData + " " + rs.getString("APPOINTMENTSTARTTIME");
             }
-            
-            else{
-                JOptionPane.showMessageDialog(null, "NO DOCTORS AVAILABLE");
-            }
-            conn.close();     
+            System.out.print("Statement executed and stored into rs\n");
+            doctorName = getData;
+            System.out.print("Statement stored into appointmentinfo\n");
+            conn.close();
         }catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, e);
-        }   
-
+        }    
         return doctorName;
+
     }
         
     private void appointmentInserter() throws SQLException
