@@ -5,9 +5,19 @@
  */
 package appointmentcalendar;
 
+import static appointmentcalendar.accountLoginGUI.JDBC_DRIVER;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 
@@ -21,6 +31,19 @@ public class CalendarGUI extends javax.swing.JFrame {
     Date SelectedDate;
     String selectedDateString;
     String selectedTimeString; 
+    
+    //Initialize database
+    static final String JDBC_DRIVER = "org.apache.derby.jdbc.ClientDriver";
+    static final String DB_URL = "jdbc:derby://localhost:1527/343Project1testdb";
+    
+    //used to log into the database
+    static final String USER = "newuser";
+    static final String PASS = "newpass";
+    
+    //establish connection
+    public Connection conn;
+    public Statement stmt; 
+    
     /**
      * Creates new form CalendarGUI
      */
@@ -307,7 +330,14 @@ public class CalendarGUI extends javax.swing.JFrame {
         //selectedTimeString = TimeSpinner.getValue();
         selectedDateString = GetDateString();
         selectedTimeString = GetTimeString();
-        jTextArea2.setText("The Date is \n" + selectedDateString + "\n" + "The time is \n" + selectedTimeString);
+        //jTextArea2.setText("The Date is \n" + selectedDateString + "\n" + "The time is \n" + selectedTimeString);
+        String theAppointmentInfo = "";
+        try {
+            theAppointmentInfo = ViewAppointmantSQL();
+        } catch (SQLException ex) {
+            Logger.getLogger(CalendarGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jTextArea2.setText(theAppointmentInfo); 
         
     }//GEN-LAST:event_viewAppointmentButtonActionPerformed
 
@@ -389,6 +419,50 @@ public class CalendarGUI extends javax.swing.JFrame {
         selectedDate.setTime((Date)TimeSpinner.getValue());
         selectedTimeString = String.format("%02d:%02d", Calendar.HOUR_OF_DAY, selectedDate.get(Calendar.MINUTE) );
         return selectedTimeString;
+    }
+    
+    private String ViewAppointmantSQL() throws SQLException {
+        String appointmentInfo = "";
+        try{
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            selectedDateString = GetDateString();
+            selectedTimeString = GetTimeString();
+
+            //String sql = "SELECT * FROM APPOINTMENTS WHERE APPOINTMENTSTARTTIME = " + selectedDateString + " " + selectedTimeString ;
+            //String sql = "SELECT PID FROM APPOINTMENTS WHERE APPOINTMENTSTARTTIME = ?";
+            //System.out.print("sql string stored");
+            //PreparedStatement statement = conn.prepareStatement(sql);
+            //statement.clearParameters();
+            //statement.setString(1, selectedDateString + " " + selectedTimeString);
+            
+            String sql = "SELECT * FROM APPOINTMENTS";
+            Statement statement = conn.createStatement();
+            System.out.print("Statement exectued\n");
+            ResultSet rs = statement.executeQuery(sql);
+            String getData = "";
+            int i = 0;
+            while(rs.next()){
+                getData = getData + " " + rs.getString(9);
+            }
+            System.out.print("Statement executed and stored into rs\n");
+            appointmentInfo = getData;
+            System.out.print("Statement stored into appointmentinfo\n");
+            conn.close();
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e);
+        }    
+        return appointmentInfo;
+    }
+    
+    public static String dispNull (String input) {
+        //because of short circuiting, if it's null, it never checks the length.
+        if (input == null || input.length() == 0)
+            return "N/A";
+        else
+            return input;
     }
     
     
