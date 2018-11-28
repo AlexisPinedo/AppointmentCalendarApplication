@@ -6,6 +6,8 @@
 package appointmentcalendar;
 
 import static appointmentcalendar.accountLoginGUI.JDBC_DRIVER;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -52,8 +54,6 @@ public class CalendarGUI extends javax.swing.JFrame {
         initComponents();
     }
     
-  
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -291,9 +291,15 @@ public class CalendarGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void systemExit()
+    {
+        WindowEvent winClosing = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosing);
+    }
     private void createAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAppointmentButtonActionPerformed
-       // TODO add your handling code here:
-       jDialog1.setVisible(true);
+        systemExit();
+        appointmentCreator creator = new appointmentCreator();
+        creator.setVisible(true);
     }//GEN-LAST:event_createAppointmentButtonActionPerformed
 
     private void editAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAppointmentButtonActionPerformed
