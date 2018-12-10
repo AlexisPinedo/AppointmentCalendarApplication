@@ -33,7 +33,7 @@ public class accountLoginGUI extends javax.swing.JFrame {
     public accountLoginGUI()
     {
         initComponents();
-        setSize(657,342);
+        setSize(720,480);
     }
 
     /**
@@ -51,9 +51,9 @@ public class accountLoginGUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         exitButton = new javax.swing.JButton();
         createNewAccountButton = new javax.swing.JButton();
-        signInButton1 = new javax.swing.JButton();
         passwordText = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
+        signInButton = new javax.swing.JButton();
+        changeUserPass = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -80,7 +80,7 @@ public class accountLoginGUI extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("PASSWORD");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(155, 148, 69, 16);
+        jLabel3.setBounds(150, 150, 69, 16);
 
         exitButton.setBackground(new java.awt.Color(255, 255, 0));
         exitButton.setForeground(new java.awt.Color(255, 0, 51));
@@ -91,7 +91,7 @@ public class accountLoginGUI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(exitButton);
-        exitButton.setBounds(460, 250, 78, 32);
+        exitButton.setBounds(450, 300, 78, 32);
 
         createNewAccountButton.setBackground(new java.awt.Color(255, 255, 0));
         createNewAccountButton.setForeground(new java.awt.Color(255, 0, 51));
@@ -102,24 +102,31 @@ public class accountLoginGUI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(createNewAccountButton);
-        createNewAccountButton.setBounds(100, 250, 191, 32);
+        createNewAccountButton.setBounds(90, 300, 191, 32);
+        getContentPane().add(passwordText);
+        passwordText.setBounds(150, 180, 350, 22);
 
-        signInButton1.setBackground(new java.awt.Color(255, 255, 51));
-        signInButton1.setForeground(new java.awt.Color(204, 0, 51));
-        signInButton1.setText("SIGN IN");
-        signInButton1.addActionListener(new java.awt.event.ActionListener() {
+        signInButton.setBackground(new java.awt.Color(255, 255, 51));
+        signInButton.setForeground(new java.awt.Color(204, 0, 51));
+        signInButton.setText("SIGN IN");
+        signInButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signInButton1ActionPerformed(evt);
+                signInButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(signInButton1);
-        signInButton1.setBounds(330, 250, 78, 32);
-        getContentPane().add(passwordText);
-        passwordText.setBounds(150, 170, 350, 22);
+        getContentPane().add(signInButton);
+        signInButton.setBounds(330, 300, 78, 32);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appointmentcalendar/IMG_0134.JPG"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(-1150, -320, 1820, 790);
+        changeUserPass.setBackground(new java.awt.Color(255, 255, 51));
+        changeUserPass.setForeground(new java.awt.Color(204, 0, 51));
+        changeUserPass.setText("CHANGE EMAIL ADDRESS/PASSWORD");
+        changeUserPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeUserPassActionPerformed(evt);
+            }
+        });
+        getContentPane().add(changeUserPass);
+        changeUserPass.setBounds(190, 230, 280, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -133,8 +140,14 @@ public class accountLoginGUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
 
-    private void signInButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButton1ActionPerformed
+    private void createNewAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewAccountButtonActionPerformed
+            systemExit();
+            accountCreatorGUI creator = new accountCreatorGUI();
+            creator.setVisible(true);
+    }//GEN-LAST:event_createNewAccountButtonActionPerformed
 
+    private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
+        
         try{
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -166,13 +179,13 @@ public class accountLoginGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }    
         
-    }//GEN-LAST:event_signInButton1ActionPerformed
+    }//GEN-LAST:event_signInButtonActionPerformed
 
-    private void createNewAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewAccountButtonActionPerformed
-            systemExit();
-            accountCreatorGUI creator = new accountCreatorGUI();
-            creator.setVisible(true);
-    }//GEN-LAST:event_createNewAccountButtonActionPerformed
+    private void changeUserPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeUserPassActionPerformed
+        systemExit();
+        accountChanger change = new accountChanger();
+        change.setVisible(true);
+    }//GEN-LAST:event_changeUserPassActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,14 +224,14 @@ public class accountLoginGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton changeUserPass;
     private javax.swing.JButton createNewAccountButton;
     private javax.swing.JTextField emailText;
     private javax.swing.JButton exitButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField passwordText;
-    private javax.swing.JButton signInButton1;
+    private javax.swing.JButton signInButton;
     private javax.swing.JLabel theAppointmentSchedulerTitle;
     // End of variables declaration//GEN-END:variables
 }
