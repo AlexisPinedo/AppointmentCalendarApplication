@@ -6,8 +6,15 @@
 package appointmentcalendar;
 
 import static appointmentcalendar.accountLoginGUI.JDBC_DRIVER;
+<<<<<<< HEAD
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+=======
+import com.opencsv.CSVWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+>>>>>>> 274841a856c87fad4aeac9d7c6d4675a5da3e318
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,11 +25,14 @@ import java.sql.Statement;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 /**
@@ -34,6 +44,7 @@ public class CalendarGUI extends javax.swing.JFrame {
     Date SelectedDate;
     String selectedDateString;
     String selectedTimeString; 
+    Calendar selectedDate;
     
     //Initialize database
     static final String JDBC_DRIVER = "org.apache.derby.jdbc.ClientDriver";
@@ -75,8 +86,8 @@ public class CalendarGUI extends javax.swing.JFrame {
         AppointmentCalendarTitleLabel = new javax.swing.JLabel();
         SelectedAppointmentInformationLabel = new javax.swing.JLabel();
         createAppointmentButton = new javax.swing.JButton();
-        deleteAppointmentButton = new javax.swing.JButton();
-        editAppointmentButton = new javax.swing.JButton();
+        importFileButton = new javax.swing.JButton();
+        exportFileButton = new javax.swing.JButton();
         AppointmentCalendarPanel = new datechooser.beans.DateChooserPanel();
         Date date = new Date();
         SpinnerDateModel sm =
@@ -157,12 +168,17 @@ public class CalendarGUI extends javax.swing.JFrame {
             }
         });
 
-        deleteAppointmentButton.setText("Delete Appointment");
-
-        editAppointmentButton.setText("Edit Appointment");
-        editAppointmentButton.addActionListener(new java.awt.event.ActionListener() {
+        importFileButton.setLabel("Import File");
+        importFileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editAppointmentButtonActionPerformed(evt);
+                importFileButtonActionPerformed(evt);
+            }
+        });
+
+        exportFileButton.setText("Export File");
+        exportFileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportFileButtonActionPerformed(evt);
             }
         });
 
@@ -229,33 +245,35 @@ public class CalendarGUI extends javax.swing.JFrame {
                 .addComponent(AppointmentCalendarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(AppointmentCalendarTitleLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(deleteAppointmentButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(editAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(93, 93, 93)
+                                .addComponent(AppointmentCalendarTitleLabel))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(createAppointmentButton)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(createAppointmentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(importFileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(viewAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(quitButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(appointmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(SelectedAppointmentInformationLabel)
-                                .addComponent(TimeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(newAppointmentInfoLabel)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2)))))
-                .addContainerGap(121, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(viewAppointmentButton, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                                    .addComponent(exportFileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(132, 132, 132)
+                                .addComponent(quitButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(appointmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(SelectedAppointmentInformationLabel)
+                                    .addComponent(TimeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(newAppointmentInfoLabel)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 109, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,8 +298,8 @@ public class CalendarGUI extends javax.swing.JFrame {
                     .addComponent(viewAppointmentButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(deleteAppointmentButton)
-                    .addComponent(editAppointmentButton))
+                    .addComponent(importFileButton)
+                    .addComponent(exportFileButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(quitButton)
                 .addContainerGap())
@@ -296,15 +314,31 @@ public class CalendarGUI extends javax.swing.JFrame {
         WindowEvent winClosing = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosing);
     }
+    
     private void createAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAppointmentButtonActionPerformed
         systemExit();
         appointmentCreator creator = new appointmentCreator();
         creator.setVisible(true);
     }//GEN-LAST:event_createAppointmentButtonActionPerformed
 
-    private void editAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAppointmentButtonActionPerformed
+    private void exportFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportFileButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_editAppointmentButtonActionPerformed
+        CSVWriter writer;
+        
+        try {
+            writer = new CSVWriter(new FileWriter("Appointments.csv"), '\t');
+            Boolean includeHeaders = true;
+
+            //java.sql.ResultSet myResultSet = .... //your resultset logic here
+
+            //writer.writeAll(myResultSet, includeHeaders);
+
+        writer.close();
+        } catch (IOException ex) {
+            Logger.getLogger(CalendarGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_exportFileButtonActionPerformed
 
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
         // TODO add your handling code here:
@@ -313,10 +347,8 @@ public class CalendarGUI extends javax.swing.JFrame {
 
     private void AppointmentCalendarPanelOnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_AppointmentCalendarPanelOnSelectionChange
         // TODO add your handling code here:
+        selectedDate = AppointmentCalendarPanel.getSelectedDate();
 
-        
-        
-        
     }//GEN-LAST:event_AppointmentCalendarPanelOnSelectionChange
 
     private void jMenuFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileActionPerformed
@@ -335,8 +367,8 @@ public class CalendarGUI extends javax.swing.JFrame {
     private void viewAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAppointmentButtonActionPerformed
 
         //selectedTimeString = TimeSpinner.getValue();
-        selectedDateString = GetDateString();
-        selectedTimeString = GetTimeString();
+        //selectedDateString = GetDateString();
+        //selectedTimeString = GetTimeString();
         //jTextArea2.setText("The Date is \n" + selectedDateString + "\n" + "The time is \n" + selectedTimeString);
         String theAppointmentInfo = "";
         try {
@@ -347,6 +379,54 @@ public class CalendarGUI extends javax.swing.JFrame {
         jTextArea2.setText(theAppointmentInfo); 
         
     }//GEN-LAST:event_viewAppointmentButtonActionPerformed
+
+    private void importFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importFileButtonActionPerformed
+          //Declare Variable
+          JFileChooser fileChooser = new JFileChooser();
+          FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
+          fileChooser.setFileFilter(filter);
+          StringBuilder sb = new StringBuilder();
+
+          if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+
+           //get the file
+           java.io.File file = fileChooser.getSelectedFile();
+
+           //create a scanner for the file
+           Scanner input;
+           try {
+                input = new Scanner(file);
+                while(input.hasNext()){
+                    sb.append(input.nextLine());
+                    sb.append("\n");;
+                }
+                input.close();
+                
+                String appointmentInfo = "";
+                try{
+                    Class.forName(JDBC_DRIVER);
+                    conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+                    String sql = sb.toString();
+                    newAppointmentTextPane.setText(sql);
+                    PreparedStatement statement = conn.prepareStatement(sql);
+                    System.out.print("Statement stored into Database\n");
+                    conn.close();
+                }catch(Exception e)
+                {
+                    JOptionPane.showMessageDialog(null, e);
+
+                }                 
+          } catch (FileNotFoundException ex) {
+                 Logger.getLogger(CalendarGUI.class.getName()).log(Level.SEVERE, null, ex);
+                     }
+           //read text from file
+          }
+          else{
+           sb.append("No file was selected");
+           newAppointmentTextPane.setText(sb.toString());
+          }       
+    }//GEN-LAST:event_importFileButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -395,8 +475,8 @@ public class CalendarGUI extends javax.swing.JFrame {
     private datechooser.beans.DateChooserDialog dateChooserDialog1;
     private datechooser.beans.DateChooserDialog dateChooserDialog2;
     private datechooser.beans.DateChooserDialog dateChooserDialog3;
-    private javax.swing.JButton deleteAppointmentButton;
-    private javax.swing.JButton editAppointmentButton;
+    private javax.swing.JButton exportFileButton;
+    private javax.swing.JButton importFileButton;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
@@ -415,17 +495,21 @@ public class CalendarGUI extends javax.swing.JFrame {
 
     
     String GetDateString(){
-        Calendar selectedDate = AppointmentCalendarPanel.getSelectedDate();
-        selectedDateString =  selectedDate.get(Calendar.YEAR) + "-" +
+        String temp;
+        //selectedDate = AppointmentCalendarPanel.getSelectedDate();
+        temp =  selectedDate.get(Calendar.YEAR) + "-" +
                (selectedDate.get(Calendar.MONTH)+1)  + "-" + selectedDate.get(Calendar.DATE);
-        return selectedDateString;
+        System.out.print(temp + " in get date function\n");
+        return temp;
     }
     
     String GetTimeString(){
+        String temp;
         Calendar selectedTime = AppointmentCalendarPanel.getSelectedDate();
         selectedTime.setTime((Date)TimeSpinner.getValue());
-        selectedTimeString = String.format("%02d:%02d", selectedTime.get(Calendar.HOUR_OF_DAY), selectedTime.get(Calendar.MINUTE) );
-        return selectedTimeString;
+        temp = String.format("%02d:%02d", selectedTime.get(Calendar.HOUR_OF_DAY), selectedTime.get(Calendar.MINUTE) );
+        System.out.print(temp + " in get time function\n");
+        return temp;
     }
     
     private String ViewAppointmantSQL() throws SQLException {
@@ -439,8 +523,8 @@ public class CalendarGUI extends javax.swing.JFrame {
             selectedTimeString = GetTimeString();
             System.out.print(selectedTimeString+"\n");
 
-            String sql = "SELECT * FROM APPOINTMENTS WHERE APPOINTMENTSTARTTIME = '" + selectedDateString + "' '" + selectedTimeString + "' " ;
-            System.out.print("sql string stored\n");
+            String sql = "SELECT * FROM APPOINTMENTS WHERE appointmentDateTime = '" + selectedDateString + " " + selectedTimeString + "' " ;
+            System.out.print( sql + "\n");
             
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.clearParameters();
@@ -449,7 +533,9 @@ public class CalendarGUI extends javax.swing.JFrame {
             ResultSet rs = statement.executeQuery();
             String getData = "";
             while(rs.next()){
-                getData = getData + " " + rs.getString("APPOINTMENTSTARTTIME");
+                //pID, pFname, pLname, hID, hospitalName, hospitalAddress, dID, doctorName, appointmentDateTime
+                getData = getData + "Appointment found: " + rs.getString("pFname") + " " +
+                        rs.getString("pLname") + "\n at " + rs.getString("hospitalName") + "\n";
             }
             System.out.print("Statement executed and stored into rs\n");
             appointmentInfo = getData;
@@ -458,17 +544,9 @@ public class CalendarGUI extends javax.swing.JFrame {
         }catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, e);
+            
         }    
         return appointmentInfo;
     }
-    
-    public static String dispNull (String input) {
-        //because of short circuiting, if it's null, it never checks the length.
-        if (input == null || input.length() == 0)
-            return "N/A";
-        else
-            return input;
-    }
-    
     
 }

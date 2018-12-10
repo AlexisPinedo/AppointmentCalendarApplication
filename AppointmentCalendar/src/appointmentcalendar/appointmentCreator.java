@@ -283,7 +283,16 @@ public class appointmentCreator extends javax.swing.JFrame {
     }
     
     private void confirmAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmAppointmentButtonActionPerformed
+        try
+        {
+            appointmentInserter();
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Cannot Create Appointment!");
+        }
         
+        systemExit();
     }//GEN-LAST:event_confirmAppointmentButtonActionPerformed
 
     private void pFnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pFnameActionPerformed
