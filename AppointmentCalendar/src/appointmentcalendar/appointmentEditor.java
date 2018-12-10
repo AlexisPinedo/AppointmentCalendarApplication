@@ -153,15 +153,21 @@ public class appointmentEditor extends javax.swing.JFrame {
     
     
     private void changeTimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeTimeButtonActionPerformed
-        // TODO add your handling code here:
+            systemExit();
+            timeChanger time = new timeChanger();
+            time.setVisible(true);
     }//GEN-LAST:event_changeTimeButtonActionPerformed
 
     private void changeDoctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeDoctorButtonActionPerformed
-        // TODO add your handling code here:
+            systemExit();
+            doctorChanger doc = new doctorChanger();
+            doc.setVisible(true);
     }//GEN-LAST:event_changeDoctorButtonActionPerformed
 
     private void changeLocationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeLocationButtonActionPerformed
-        // TODO add your handling code here:
+            systemExit();
+            locationChanger loc = new locationChanger();
+            loc.setVisible(true);
     }//GEN-LAST:event_changeLocationButtonActionPerformed
 
     
@@ -183,15 +189,7 @@ public class appointmentEditor extends javax.swing.JFrame {
             
             while(rs.next())
             {
-                JOptionPane.showMessageDialog(null, "Email address is valid!");
-//                appointmentList.addItem(Integer.toString(rs.getInt("pID")) + " " +
-//                   rs.getString("pFname") + " " + rs.getString("pLname") + " " + 
-//                   Integer.toString(rs.getInt("hID")) + " " 
-//                    + rs.getString("hospitalName") + " " + 
-//                        rs.getString("hospitalAddress") + " " +
-//                        Integer.toString(rs.getInt("dID")) + " " +
-//                        rs.getString("doctorName") + " " +
-//                        rs.getString("appointmentDateTime"));     
+                JOptionPane.showMessageDialog(null, "Email address is valid!");   
                 appointmentList.addItem(rs.getString("hospitalName") + " " + 
                         rs.getString("hospitalAddress") + " " +
                         rs.getString("doctorName") + " " +

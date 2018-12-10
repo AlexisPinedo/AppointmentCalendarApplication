@@ -162,15 +162,21 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="appointmentLabel" min="-2" max="-2" attributes="0"/>
                                   <Component id="SelectedAppointmentInformationLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TimeSpinner" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
                                   <Component id="newAppointmentInfoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jScrollPane2" alignment="0" min="-2" pref="277" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="appointmentLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="TimeSpinner" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                      <Component id="appointmentChange" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="109" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="86" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -191,9 +197,14 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-              <Component id="appointmentLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-              <Component id="TimeSpinner" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="appointmentLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Component id="TimeSpinner" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="appointmentChange" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Component id="newAppointmentInfoLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -326,6 +337,11 @@
     <Component class="java.awt.Label" name="appointmentLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Appointment Time"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="appointmentChange">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Change Appointment"/>
       </Properties>
     </Component>
   </SubComponents>
