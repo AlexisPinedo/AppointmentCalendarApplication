@@ -5,7 +5,6 @@
  */
 package appointmentcalendar;
 
-import static appointmentcalendar.changeUsername.JDBC_DRIVER;
 import java.awt.Toolkit;
 import java.util.Scanner;
 import java.awt.event.WindowEvent;
