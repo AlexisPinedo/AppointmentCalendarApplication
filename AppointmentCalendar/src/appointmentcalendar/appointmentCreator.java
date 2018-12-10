@@ -74,7 +74,7 @@ public class appointmentCreator extends javax.swing.JFrame {
 
         jLabel2.setText("SELECT THE LOCATION OF THE HOSPITAL");
 
-        locationComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "3401 S Harbor Blvd, Santa Ana, CA", "3717 S Euclid St, Garden Grove, CA", "5451 S Chapman Ave, Orange, CA", "506 S Beach Blvd, Huntington Beach, CA", "2523 S La Palma Ave, Anaheim, CA" }));
+        locationComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "3401 S Harbor Blvd", "Santa Ana", "CA", "3717 S Euclid St", "Garden Grove", "CA", "5451 S Chapman Ave", "Orange", "CA", "506 S Beach Blvd", "Huntington Beach", "CA", "2523 S La Palma Ave", "Anaheim", "CA" }));
 
         confirmAppointmentButton.setText("CONFIRM APPOINTMENT");
         confirmAppointmentButton.addActionListener(new java.awt.event.ActionListener() {
@@ -112,9 +112,8 @@ public class appointmentCreator extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(hospitalComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(hospitalComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(locationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
