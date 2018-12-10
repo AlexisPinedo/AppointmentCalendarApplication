@@ -140,7 +140,6 @@ public class accountChanger extends javax.swing.JFrame {
     private void systemExit()
     {
         WindowEvent winClosing = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosing);
     }
     
     private void userPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userPassActionPerformed
@@ -163,8 +162,7 @@ public class accountChanger extends javax.swing.JFrame {
             if(rs.next())
             {
                 JOptionPane.showMessageDialog(null, "Sign In Successful!");
-                systemExit();
-                
+                systemExit();                
                 changeUsername user = new changeUsername();
                 user.setVisible(true);
             }
@@ -204,8 +202,7 @@ public class accountChanger extends javax.swing.JFrame {
             if(rs.next())
             {
                 JOptionPane.showMessageDialog(null, "Sign In Successful!");
-                systemExit();
-                
+                systemExit();                
                 changePassword pass = new changePassword();
                 pass.setVisible(true);
             }

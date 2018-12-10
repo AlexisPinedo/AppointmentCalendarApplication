@@ -103,14 +103,13 @@ public class changePassword extends javax.swing.JFrame {
     private void systemExit()
     {
         WindowEvent winClosing = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosing);
     }
     
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         try{
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
-            String sql = "UPDATE Patients SET publisherName = ? WHERE publisherName = ?";
+            String sql = "UPDATE Patients SET password = ? WHERE password = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.clearParameters();
             statement.setString(1,newUserPass.getText());
