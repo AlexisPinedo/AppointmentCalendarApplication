@@ -156,7 +156,7 @@ public class accountLoginGUI extends javax.swing.JFrame {
             
             statement.clearParameters();
             statement.setString(1,emailText.getText());
-            statement.setString(1,passwordText.getText());
+            statement.setString(2,passwordText.getText());
             ResultSet rs = statement.executeQuery();
             
             if(rs.next())
