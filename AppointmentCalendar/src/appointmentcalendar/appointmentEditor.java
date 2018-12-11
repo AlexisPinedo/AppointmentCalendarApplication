@@ -169,7 +169,6 @@ public class appointmentEditor extends javax.swing.JFrame {
             locationChanger loc = new locationChanger();
             loc.setVisible(true);
     }//GEN-LAST:event_changeLocationButtonActionPerformed
-
     
     private void validation()
     {
@@ -201,6 +200,7 @@ public class appointmentEditor extends javax.swing.JFrame {
             System.out.println(e);
         }   
     }
+    
     private void validateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validateButtonActionPerformed
 
             validation();           

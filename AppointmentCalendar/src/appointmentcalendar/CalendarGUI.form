@@ -343,6 +343,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Change Appointment"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="appointmentChangeActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

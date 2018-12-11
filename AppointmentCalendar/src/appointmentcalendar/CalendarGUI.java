@@ -226,6 +226,11 @@ public class CalendarGUI extends javax.swing.JFrame {
         appointmentLabel.setText("Appointment Time");
 
         appointmentChange.setText("Change Appointment");
+        appointmentChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                appointmentChangeActionPerformed(evt);
+            }
+        });
 
         jMenuFile.setText("File");
         jMenuFile.addActionListener(new java.awt.event.ActionListener() {
@@ -437,6 +442,12 @@ public class CalendarGUI extends javax.swing.JFrame {
            newAppointmentTextPane.setText(sb.toString());
           }       
     }//GEN-LAST:event_importFileButtonActionPerformed
+
+    private void appointmentChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentChangeActionPerformed
+            systemExit();
+            appointmentEditor edit = new appointmentEditor();
+            edit.setVisible(true);
+    }//GEN-LAST:event_appointmentChangeActionPerformed
 
     /**
      * @param args the command line arguments
