@@ -6,6 +6,7 @@
 package appointmentcalendar;
 
 import static appointmentcalendar.accountLoginGUI.JDBC_DRIVER;
+import java.awt.Color;
 //<<<<<<< HEAD
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
@@ -28,11 +29,14 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JFrame;
+
 
 
 /**
@@ -103,8 +107,10 @@ public class CalendarGUI extends javax.swing.JFrame {
         appointmentLabel = new java.awt.Label();
         appointmentChange = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenuFile = new javax.swing.JMenu();
+        fileMenu = new javax.swing.JMenu();
+        createAccountMenuItem = new javax.swing.JMenuItem();
         jMenuEdit = new javax.swing.JMenu();
+        colorMenuItem = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -157,6 +163,8 @@ public class CalendarGUI extends javax.swing.JFrame {
         button1.getAccessibleContext().setAccessibleName("CloseCreateAppointmentButton");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Appointment Calendar");
+        setName("appointment Calndar"); // NOI18N
 
         AppointmentCalendarTitleLabel.setText("Appointment Calendar");
 
@@ -232,15 +240,33 @@ public class CalendarGUI extends javax.swing.JFrame {
             }
         });
 
-        jMenuFile.setText("File");
-        jMenuFile.addActionListener(new java.awt.event.ActionListener() {
+        fileMenu.setText("File");
+        fileMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuFileActionPerformed(evt);
+                fileMenuActionPerformed(evt);
             }
         });
-        jMenuBar1.add(jMenuFile);
+
+        createAccountMenuItem.setText("Create Account");
+        createAccountMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createAccountMenuItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(createAccountMenuItem);
+
+        jMenuBar1.add(fileMenu);
 
         jMenuEdit.setText("Edit");
+
+        colorMenuItem.setText("Edit Color");
+        colorMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                colorMenuItemActionPerformed(evt);
+            }
+        });
+        jMenuEdit.add(colorMenuItem);
+
         jMenuBar1.add(jMenuEdit);
 
         setJMenuBar(jMenuBar1);
@@ -321,6 +347,8 @@ public class CalendarGUI extends javax.swing.JFrame {
             .addComponent(AppointmentCalendarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        getAccessibleContext().setAccessibleDescription("");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -366,9 +394,9 @@ public class CalendarGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_AppointmentCalendarPanelOnSelectionChange
 
-    private void jMenuFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileActionPerformed
+    private void fileMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileMenuActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuFileActionPerformed
+    }//GEN-LAST:event_fileMenuActionPerformed
 
     private void TimeSpinnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TimeSpinnerMouseClicked
         // TODO add your handling code here:
@@ -449,6 +477,23 @@ public class CalendarGUI extends javax.swing.JFrame {
             edit.setVisible(true);
     }//GEN-LAST:event_appointmentChangeActionPerformed
 
+    private void createAccountMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountMenuItemActionPerformed
+        // TODO add your handling code here:
+        systemExit();
+        accountCreatorGUI creator = new accountCreatorGUI();
+        creator.setVisible(true);
+    }//GEN-LAST:event_createAccountMenuItemActionPerformed
+
+    private void colorMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorMenuItemActionPerformed
+        // TODO add your handling code here:
+        //ColorChooserFrame.setTitle("Choose Color");
+        //ColorChooserFrame.setSize(625, 415);
+        //ColorChooserFrame.setVisible(true);
+        //JFrame jFrame = new JFrame("Color");
+        this.getContentPane().setBackground(JColorChooser.showDialog(null, "Pick Color", Color.yellow));
+        
+    }//GEN-LAST:event_colorMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -492,18 +537,20 @@ public class CalendarGUI extends javax.swing.JFrame {
     private javax.swing.JButton appointmentChange;
     private java.awt.Label appointmentLabel;
     private java.awt.Button button1;
+    private javax.swing.JMenuItem colorMenuItem;
+    private javax.swing.JMenuItem createAccountMenuItem;
     private javax.swing.JButton createAppointmentButton;
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private datechooser.beans.DateChooserDialog dateChooserDialog1;
     private datechooser.beans.DateChooserDialog dateChooserDialog2;
     private datechooser.beans.DateChooserDialog dateChooserDialog3;
     private javax.swing.JButton exportFileButton;
+    private javax.swing.JMenu fileMenu;
     private javax.swing.JButton importFileButton;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuEdit;
-    private javax.swing.JMenu jMenuFile;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner jSpinner1;

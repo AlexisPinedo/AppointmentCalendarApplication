@@ -5,10 +5,18 @@
  */
 package appointmentcalendar;
 
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 /**
  *
  * @author Alex and Abby's
  */
-public class QuartzJob {
-    
+public class QuartzJob implements Job {
+
+    @Override
+    public int execute(JobExecutionContext arg0) throws JobExecutionException){
+        
+        return 5;
+    }
 }
