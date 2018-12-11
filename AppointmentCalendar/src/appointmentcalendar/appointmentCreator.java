@@ -175,9 +175,9 @@ public class appointmentCreator extends javax.swing.JFrame {
         WindowEvent winClosing = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
     }
     
-    private String getHospitalID() throws SQLException
+    private int getHospitalID() throws SQLException
     {
-        String hID = "";
+        int hID = 0;
         try{
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -198,7 +198,7 @@ public class appointmentCreator extends javax.swing.JFrame {
                 getData = getData + " " + rs.getString("APPOINTMENTSTARTTIME");
             }
             System.out.print("Statement executed and stored into rs\n");
-            hID = getData;
+            hID = Integer.parseInt(getData);
             System.out.print("Statement stored into appointmentinfo\n");
             conn.close();
         }catch(Exception e)
@@ -208,9 +208,9 @@ public class appointmentCreator extends javax.swing.JFrame {
         return hID;
     }
     
-    private String getDoctorID() throws SQLException
+    private int getDoctorID() throws SQLException
     {
-        String dID = "";
+        int dID = 0;
         try{
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -231,7 +231,7 @@ public class appointmentCreator extends javax.swing.JFrame {
                 getData = getData + " " + rs.getString("APPOINTMENTSTARTTIME");
             }
             System.out.print("Statement executed and stored into rs\n");
-            dID = getData;
+            dID = Integer.parseInt(getData);
             System.out.print("Statement stored into appointmentinfo\n");
             conn.close();
         }catch(Exception e)
@@ -254,11 +254,9 @@ public class appointmentCreator extends javax.swing.JFrame {
                     + "WHERE appointmentDateTime = '2018-12-12 08:00";
             
             String patientID = pID.getText();
-            String hospitalID = getHospitalID();
-            String doctorID = getDoctorID();
             int pID = Integer.parseInt(patientID);
-            int hID = Integer.parseInt(hospitalID);
-            int dID = Integer.parseInt(doctorID);
+            int hID = getHospitalID();
+            int dID = getDoctorID();
             PreparedStatement statement = conn.prepareStatement(sql);      
 
             statement.clearParameters();
