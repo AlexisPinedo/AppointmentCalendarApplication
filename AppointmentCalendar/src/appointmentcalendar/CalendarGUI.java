@@ -355,8 +355,7 @@ public class CalendarGUI extends javax.swing.JFrame {
     private void systemExit()
     {
         WindowEvent winClosing = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-    }
-    
+    } 
     
     private void createAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAppointmentButtonActionPerformed
         systemExit();
@@ -365,22 +364,10 @@ public class CalendarGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_createAppointmentButtonActionPerformed
 
     private void exportFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportFileButtonActionPerformed
-//        // TODO add your handling code here:
-//        CSVWriter writer;
-//        
-//        try {
-//            writer = new CSVWriter(new FileWriter("Appointments.csv"), '\t');
-//            Boolean includeHeaders = true;
-//
-//            //java.sql.ResultSet myResultSet = .... //your resultset logic here
-//
-//            //writer.writeAll(myResultSet, includeHeaders);
-//
-//        writer.close();
-//        } catch (IOException ex) {
-//            Logger.getLogger(CalendarGUI.class.getName()).log(Level.SEVERE, null, ex);
-//        }
 
+        systemExit();
+        fileExporter export = new fileExporter();
+        export.setVisible(true);
     }//GEN-LAST:event_exportFileButtonActionPerformed
 
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed

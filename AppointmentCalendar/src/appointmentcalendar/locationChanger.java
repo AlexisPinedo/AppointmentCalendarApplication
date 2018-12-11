@@ -235,10 +235,10 @@ public class locationChanger extends javax.swing.JFrame {
             statement.setString(2,patientIDText.getText());
             statement.executeUpdate();
             JOptionPane.showMessageDialog(null, "UPDATE SUCCESSFUL!");
-            
+
             systemExit();
-            accountLoginGUI login = new accountLoginGUI();
-            login.setVisible(true);
+            CalendarGUI calendar = new CalendarGUI();
+            calendar.setVisible(true);
       
         }catch(Exception e)
         {

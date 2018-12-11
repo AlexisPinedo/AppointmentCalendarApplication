@@ -233,8 +233,8 @@ public class doctorTimeChanger extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "UPDATE SUCCESSFUL!");
 
             systemExit();
-            accountLoginGUI login = new accountLoginGUI();
-            login.setVisible(true);
+            CalendarGUI calendar = new CalendarGUI();
+            calendar.setVisible(true);
 
         }catch(Exception e)
         {
