@@ -60,6 +60,7 @@ public class appointmentEditor extends javax.swing.JFrame {
         changeLocationButton = new javax.swing.JButton();
         changeDoctorButton = new javax.swing.JButton();
         appointmentList = new javax.swing.JComboBox<>();
+        deleteAppointmentButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,14 +89,17 @@ public class appointmentEditor extends javax.swing.JFrame {
             }
         });
 
+        deleteAppointmentButton.setText("DELETE APPOINTMENT");
+        deleteAppointmentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteAppointmentButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(appointmentList, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,12 +110,19 @@ public class appointmentEditor extends javax.swing.JFrame {
                         .addGap(101, 101, 101)
                         .addComponent(validateButton)))
                 .addGap(197, 197, 197))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(changeLocationButton)
-                .addGap(130, 130, 130)
-                .addComponent(changeDoctorButton)
-                .addGap(131, 131, 131))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(appointmentList, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(changeLocationButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(changeDoctorButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteAppointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,7 +140,8 @@ public class appointmentEditor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(changeLocationButton)
-                    .addComponent(changeDoctorButton))
+                    .addComponent(changeDoctorButton)
+                    .addComponent(deleteAppointmentButton))
                 .addGap(70, 70, 70))
         );
 
@@ -190,6 +202,10 @@ public class appointmentEditor extends javax.swing.JFrame {
             validation();           
     }//GEN-LAST:event_validateButtonActionPerformed
 
+    private void deleteAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAppointmentButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteAppointmentButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -236,6 +252,7 @@ public class appointmentEditor extends javax.swing.JFrame {
     private javax.persistence.Query appointmentsQuery2;
     private javax.swing.JButton changeDoctorButton;
     private javax.swing.JButton changeLocationButton;
+    private javax.swing.JButton deleteAppointmentButton;
     private javax.swing.JTextField emailText;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel jLabel1;

@@ -75,7 +75,7 @@ public class doctorTimeChanger extends javax.swing.JFrame {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 //            Statement statement = conn.createStatement();    
-            String sql = "Select doctorName, appointmentDateTime FROM Appointments "
+            String sql = "Select doctorName, timeStart FROM Doctors "
                     + "NATURAL JOIN Patients WHERE pEmail = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
 //            ResultSet rs = statement.executeQuery(sql);
@@ -89,7 +89,7 @@ public class doctorTimeChanger extends javax.swing.JFrame {
 //                hospitalLocationList.addItem(rs.getString("hospitalName") + " " + 
 //                        rs.getString("hospitalAddress"));  
                 doctorList.addItem(rs.getString("doctorName") + " " + 
-                        rs.getString("appointmentDateTime"));
+                        rs.getString("timeStart"));
             }                          
         }
         catch(Exception e)
