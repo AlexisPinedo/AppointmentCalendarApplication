@@ -329,6 +329,7 @@ public class CalendarGUI extends javax.swing.JFrame {
         WindowEvent winClosing = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
     }
     
+    
     private void createAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAppointmentButtonActionPerformed
         systemExit();
         appointmentCreator creator = new appointmentCreator();
