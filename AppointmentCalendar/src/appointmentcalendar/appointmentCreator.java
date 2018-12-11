@@ -190,34 +190,6 @@ public class appointmentCreator extends javax.swing.JFrame {
         WindowEvent winClosing = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
     }
     
-    private void timeChoices()
-    {
-         try{
-            Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
-//            Statement statement = conn.createStatement();    
-            String sql = "Select timeStart FROM Doctors WHERE doctorName = ?";
-            PreparedStatement statement = conn.prepareStatement(sql);
-//            ResultSet rs = statement.executeQuery(sql);
-            
-            statement.clearParameters();
-            statement.setString(1,doctorComboBox1.getSelectedItem().toString());
-            ResultSet rs = statement.executeQuery();
-            JOptionPane.showMessageDialog(null, "PASSWORD IS VALID!");
-            
-            while(rs.next())
-            {
-//                hospitalLocationList.addItem(rs.getString("hospitalName") + " " + 
-//                        rs.getString("hospitalAddress"));  
-                locationComboBox.addItem(rs.getString("hospitalName"));
-            }                          
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
-        }           
-    }
-    
     private void hospitalChoices()
     {
          try{
@@ -247,8 +219,35 @@ public class appointmentCreator extends javax.swing.JFrame {
             System.out.println(e);
         }           
     }
+        
+    private void timeChoices()
+    {
+         try{
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+//            Statement statement = conn.createStatement();    
+            String sql = "SELECT timeStart FROM Doctors WHERE doctorName = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+//            ResultSet rs = statement.executeQuery(sql);
+            
+            statement.clearParameters();
+            statement.setString(1,doctorComboBox1.getSelectedItem().toString());
+            ResultSet rs = statement.executeQuery();
+            
+            while(rs.next())
+            {
+//                hospitalLocationList.addItem(rs.getString("hospitalName") + " " + 
+//                        rs.getString("hospitalAddress"));  
+                locationComboBox.addItem(rs.getString("hospitalName"));
+            }                          
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }           
+    }
     
-        private void doctorChoices()
+    private void doctorChoices()
     {
          try{
             Class.forName(JDBC_DRIVER);
@@ -265,8 +264,7 @@ public class appointmentCreator extends javax.swing.JFrame {
          
             while(rs.next())
             {
-//                hospitalLocationList.addItem(rs.getString("hospitalName") + " " + 
-//                        rs.getString("hospitalAddress"));  
+ 
                 doctorComboBox1.addItem(rs.getString("doctorName"));
             }                          
         }
