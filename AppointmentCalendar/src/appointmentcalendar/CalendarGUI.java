@@ -424,51 +424,88 @@ public class CalendarGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_viewAppointmentButtonActionPerformed
 
     private void importFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importFileButtonActionPerformed
-          //Declare Variable
-          JFileChooser fileChooser = new JFileChooser();
-          FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
-          fileChooser.setFileFilter(filter);
-          StringBuilder sb = new StringBuilder();
+    //Declare Variable
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
+        fileChooser.setFileFilter(filter);
+        StringBuilder sb = new StringBuilder();
 
-          if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+        System.out.print("got selected file\n");
+        if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            //get the file
+            java.io.File file = fileChooser.getSelectedFile();
 
-           //get the file
-           java.io.File file = fileChooser.getSelectedFile();
-
-           //create a scanner for the file
-           Scanner input;
-           try {
+            //create a scanner for the file
+            Scanner input;
+            try {
                 input = new Scanner(file);
-                while(input.hasNext()){
-                    sb.append(input.nextLine());
-                    sb.append("\n");;
+                while (input.hasNextLine()) {
+                    String aLine = input.nextLine();
+                    String data[] = aLine.split(" ");
+                    String firstName = data[0];
+                    String lastName = data[1];
+                    String date = data[2];
+                    String time = data[3];
+                    String pID = data[4];
+                    
+                    //newAppointmentTextPane.setText(firstName + lastName);
+                    String appointmentInfo = "";
+                    try {
+                        Class.forName(JDBC_DRIVER);
+                        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+                        String sql = "SELECT * FROM Patients WHERE PFNAME = '" + firstName + "' AND PLNAME = '" + lastName + "'";
+
+                        PreparedStatement statement = conn.prepareStatement(sql);
+                        System.out.print("Statement stored into Database\n");
+                        ResultSet rs = statement.executeQuery();
+                        System.out.print("Statement executed\n");
+                        String getData = "";
+                        if (rs.next() == true) {
+                            while (rs.next()) {
+                                //pID, pFname, pLname, hID, hospitalName, hospitalAddress, dID, doctorName, appointmentDateTime
+                                getData = getData + "Patient found: " + rs.getString("pFname") + " "
+                                        + rs.getString("pLname") + "\n at " + "\n";
+                                pID = rs.getString("pID");
+                                System.out.print("pid is " + pID + "\n");
+                            }
+                            System.out.print("got passed while loop pid is \n" + pID);
+                            //System.out.print("Statement executed and stored into rs\n");
+                            //appointmentInfo = getData;
+                            System.out.print("storing sql statement into string\n");
+                            newAppointmentTextPane.setText("File Has been imported");
+                            /*String astatement = "INSERT INTO Appointments (pID, pFname, pLname, hID, hospitalName, hospitalAddress, "
+                                    + "dID, doctorName, appointmentDateTime) VALUES " + pID + ", \"" 
+                                    + firstName + "\", \"" + lastName + "\", " + "4056781, \"Kaiser Permanente\", "
+                                    + "\"3401 S Harbor Blvd, Santa Ana, CA\", 567551, \"Glenn Quagmire\", \"" + date + " " + time + 
+                                    "\"";
+                            System.out.print("Statement stored into Database\n");
+                            System.out.print("Appointment has been stored\n");
+                            newAppointmentTextPane.setText(astatement);
+                            statement = conn.prepareStatement(astatement);
+                            statement.executeUpdate();*/
+                        }
+                        else{
+                            newAppointmentTextPane.setText("Person not found");
+                        }
+                            
+                        conn.close();
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e);
+                    }
                 }
                 input.close();
-                
-                String appointmentInfo = "";
-                try{
-                    Class.forName(JDBC_DRIVER);
-                    conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
-                    String sql = sb.toString();
-                    newAppointmentTextPane.setText(sql);
-                    PreparedStatement statement = conn.prepareStatement(sql);
-                    System.out.print("Statement stored into Database\n");
-                    conn.close();
-                }catch(Exception e)
-                {
-                    JOptionPane.showMessageDialog(null, e);
-
-                }                 
-          } catch (FileNotFoundException ex) {
-                 Logger.getLogger(CalendarGUI.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-           //read text from file
-          }
-          else{
-           sb.append("No file was selected");
-           newAppointmentTextPane.setText(sb.toString());
-          }       
+                /*
+                 */
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(CalendarGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //read text from file
+        } else {
+            sb.append("No file was selected");
+            newAppointmentTextPane.setText(sb.toString());
+        }
     }//GEN-LAST:event_importFileButtonActionPerformed
 
     private void appointmentChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentChangeActionPerformed
