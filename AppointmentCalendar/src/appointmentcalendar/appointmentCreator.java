@@ -50,8 +50,6 @@ public class appointmentCreator extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        hospitalComboBox = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         locationComboBox = new javax.swing.JComboBox<>();
         confirmAppointmentButton = new javax.swing.JButton();
@@ -65,16 +63,15 @@ public class appointmentCreator extends javax.swing.JFrame {
         pLname = new javax.swing.JTextField();
         pFname = new javax.swing.JTextField();
         pID = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        passFieldTxt = new javax.swing.JPasswordField();
+        validateButton = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        emailTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("SELECT AN HOSPITAL");
-
-        hospitalComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kaiser Permanente" }));
-
         jLabel2.setText("SELECT THE LOCATION OF THE HOSPITAL");
-
-        locationComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "3401 S Harbor Blvd", "Santa Ana", "CA", "3717 S Euclid St", "Garden Grove", "CA", "5451 S Chapman Ave", "Orange", "CA", "506 S Beach Blvd", "Huntington Beach", "CA", "2523 S La Palma Ave", "Anaheim", "CA" }));
 
         confirmAppointmentButton.setText("CONFIRM APPOINTMENT");
         confirmAppointmentButton.addActionListener(new java.awt.event.ActionListener() {
@@ -86,8 +83,6 @@ public class appointmentCreator extends javax.swing.JFrame {
         jLabel3.setText("SELECT THE DOCTOR");
 
         jLabel4.setText("SELECT THE TIME");
-
-        timeComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00" }));
 
         jLabel5.setText("FIRST NAME");
 
@@ -103,42 +98,62 @@ public class appointmentCreator extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setText("ENTER YOUR PASSWORD");
+
+        validateButton.setText("VALIDATE");
+        validateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validateButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("ENTER YOUR EMAIL");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(57, 57, 57)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(hospitalComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(locationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(timeComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(doctorComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pLname)
-                            .addComponent(pFname, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
-                            .addComponent(pID)))
+                        .addGap(124, 124, 124)
+                        .addComponent(confirmAppointmentButton))
+                    .addComponent(locationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(timeComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(doctorComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pLname)
+                    .addComponent(pFname)
+                    .addComponent(pID)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passFieldTxt)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addComponent(confirmAppointmentButton)))
-                .addContainerGap(120, Short.MAX_VALUE))
+                        .addGap(146, 146, 146)
+                        .addComponent(validateButton))
+                    .addComponent(emailTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hospitalComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passFieldTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(validateButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(locationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,9 +177,9 @@ public class appointmentCreator extends javax.swing.JFrame {
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addComponent(confirmAppointmentButton)
-                .addGap(27, 27, 27))
+                .addGap(44, 44, 44))
         );
 
         pack();
@@ -175,83 +190,158 @@ public class appointmentCreator extends javax.swing.JFrame {
         WindowEvent winClosing = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
     }
     
+    private void timeChoices()
+    {
+         try{
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+//            Statement statement = conn.createStatement();    
+            String sql = "Select timeStart FROM Doctors WHERE doctorName = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+//            ResultSet rs = statement.executeQuery(sql);
+            
+            statement.clearParameters();
+            statement.setString(1,doctorComboBox1.getSelectedItem().toString());
+            ResultSet rs = statement.executeQuery();
+            JOptionPane.showMessageDialog(null, "PASSWORD IS VALID!");
+            
+            while(rs.next())
+            {
+//                hospitalLocationList.addItem(rs.getString("hospitalName") + " " + 
+//                        rs.getString("hospitalAddress"));  
+                locationComboBox.addItem(rs.getString("hospitalName"));
+            }                          
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }           
+    }
+    
+    private void hospitalChoices()
+    {
+         try{
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+//            Statement statement = conn.createStatement();    
+            String sql = "Select hospitalName FROM Appointments NATURAL JOIN Patients"
+                    + "WHERE pEmail = ? AND password = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+//            ResultSet rs = statement.executeQuery(sql);
+            
+            statement.clearParameters();
+            statement.setString(1,emailTxt.getText());
+            statement.setString(2,passFieldTxt.getText());
+            ResultSet rs = statement.executeQuery();
+            JOptionPane.showMessageDialog(null, "PASSWORD IS VALID!");
+            
+            while(rs.next())
+            {
+//                hospitalLocationList.addItem(rs.getString("hospitalName") + " " + 
+//                        rs.getString("hospitalAddress"));  
+                locationComboBox.addItem(rs.getString("hospitalName"));
+            }                          
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }           
+    }
+    
+        private void doctorChoices()
+    {
+         try{
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+//            Statement statement = conn.createStatement();    
+            String sql = "Select doctorName FROM Doctors NATURAL JOIN Hospital"
+                    + "WHERE hospitalAddress = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+//            ResultSet rs = statement.executeQuery(sql);
+            
+            statement.clearParameters();
+            statement.setString(1,locationComboBox.getSelectedItem().toString());
+            ResultSet rs = statement.executeQuery();
+         
+            while(rs.next())
+            {
+//                hospitalLocationList.addItem(rs.getString("hospitalName") + " " + 
+//                        rs.getString("hospitalAddress"));  
+                doctorComboBox1.addItem(rs.getString("doctorName"));
+            }                          
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }           
+    }
+        
     private int getHospitalID() throws SQLException
     {
-        int hID = 0;
+        int hospitalID = 0;
         try{
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
-            String appointmentDate = doctorComboBox1.getSelectedItem().toString();
-            String hospitalLocation = locationComboBox.getSelectedItem().toString();
-
-            String sql = "SELECT hID FROM Appointments "
-                    + "WHERE appointmentDateTime = '" + appointmentDate 
-                    + "OR hospitalAddress = '" + hospitalLocation ;
+            String sql = "SELECT hID FROM Hospital "
+                    + "WHERE hospitalAddress = ?";
             
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.clearParameters();           
-            System.out.print("Statement exectued\n");
+//            ResultSet rs = statement.executeQuery(sql);
+            
+            statement.clearParameters();
+            statement.setString(1,locationComboBox.getSelectedItem().toString());
             ResultSet rs = statement.executeQuery();
-            String getData = "";
+            
             while(rs.next()){
-                getData = getData + " " + rs.getString("APPOINTMENTSTARTTIME");
+                hospitalID = rs.getInt("hID");
             }
-            System.out.print("Statement executed and stored into rs\n");
-            hID = Integer.parseInt(getData);
-            System.out.print("Statement stored into appointmentinfo\n");
-            conn.close();
+
         }catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, e);
         }    
-        return hID;
+        
+        return hospitalID;
     }
     
     private int getDoctorID() throws SQLException
     {
-        int dID = 0;
+        int doctorID = 0;
         try{
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
-            String appointmentDate = doctorComboBox1.getSelectedItem().toString();
-            String hospitalLocation = locationComboBox.getSelectedItem().toString();
-
-            String sql = "SELECT dID FROM Appointments "
-                    + "WHERE appointmentDateTime = '" + appointmentDate 
-                    + "OR hospitalAddress = '" + hospitalLocation ;
+            String sql = "SELECT dID FROM Doctors "
+                    + "WHERE doctorName = ?";
             
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.clearParameters();           
-            System.out.print("Statement exectued\n");
+//            ResultSet rs = statement.executeQuery(sql);
+            
+            statement.clearParameters();
+            statement.setString(1,doctorComboBox1.getSelectedItem().toString());
             ResultSet rs = statement.executeQuery();
-            String getData = "";
+            
             while(rs.next()){
-                getData = getData + " " + rs.getString("APPOINTMENTSTARTTIME");
+                doctorID = rs.getInt("hID");
             }
-            System.out.print("Statement executed and stored into rs\n");
-            dID = Integer.parseInt(getData);
-            System.out.print("Statement stored into appointmentinfo\n");
-            conn.close();
+
         }catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, e);
         }    
-        return dID;
-    }
         
+        return doctorID;
+    }
+          
     private void appointmentInserter() throws SQLException
     {
         try{
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
             String sql = "INSERT INTO Appointments (pID, pFname, pLname, hID, "
-                    + "hospitalName, hospitalAddress, dID, doctorName, "
+                    + "hospitalAddress, dID, doctorName, "
                     + "appointmentDateTime) VALUES (?,?,?,?,?,?,?,?,?)";
-            
-            String doctorNameSQL = "SELECT doctorName FROM Appointments "
-                    + "WHERE appointmentDateTime = '2018-12-12 08:00";
             
             String patientID = pID.getText();
             int pID = Integer.parseInt(patientID);
@@ -264,11 +354,10 @@ public class appointmentCreator extends javax.swing.JFrame {
             statement.setString(2,pFname.getText());
             statement.setString(3,pLname.getText());
             statement.setInt(4,hID);
-            statement.setString(5,hospitalComboBox.getSelectedItem().toString());
-            statement.setString(6,locationComboBox.getSelectedItem().toString()); 
-            statement.setInt(7,dID);
-            statement.setString(8,doctorComboBox1.getSelectedItem().toString());
-            statement.setString(9,timeComboBox1.getSelectedItem().toString()); 
+            statement.setString(5,locationComboBox.getSelectedItem().toString()); 
+            statement.setInt(6,dID);
+            statement.setString(7,doctorComboBox1.getSelectedItem().toString());
+            statement.setString(8,timeComboBox1.getSelectedItem().toString()); 
             statement.executeUpdate();
             System.out.println("Appointment is successfully created!");
             conn.close();
@@ -295,6 +384,10 @@ public class appointmentCreator extends javax.swing.JFrame {
     private void pFnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pFnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pFnameActionPerformed
+
+    private void validateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validateButtonActionPerformed
+        hospitalChoices();
+    }//GEN-LAST:event_validateButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -334,18 +427,21 @@ public class appointmentCreator extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton confirmAppointmentButton;
     private javax.swing.JComboBox<String> doctorComboBox1;
-    private javax.swing.JComboBox<String> hospitalComboBox;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField emailTxt;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JComboBox<String> locationComboBox;
     private javax.swing.JTextField pFname;
     private javax.swing.JTextField pID;
     private javax.swing.JTextField pLname;
+    private javax.swing.JPasswordField passFieldTxt;
     private javax.swing.JComboBox<String> timeComboBox1;
+    private javax.swing.JButton validateButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -23,44 +23,52 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel1" max="32767" attributes="0"/>
-                          <Component id="hospitalComboBox" max="32767" attributes="0"/>
-                          <Component id="locationComboBox" alignment="0" min="-2" pref="181" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
-                          <Component id="timeComboBox1" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
-                          <Component id="jLabel6" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
-                          <Component id="doctorComboBox1" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
-                          <Component id="pLname" alignment="0" max="32767" attributes="0"/>
-                          <Component id="pFname" alignment="0" pref="374" max="32767" attributes="0"/>
-                          <Component id="pID" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jLabel9" alignment="0" min="-2" pref="261" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
                       <Component id="confirmAppointmentButton" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="locationComboBox" alignment="0" min="-2" pref="181" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
+                  <Component id="jLabel4" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
+                  <Component id="timeComboBox1" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                  <Component id="jLabel3" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
+                  <Component id="jLabel5" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
+                  <Component id="jLabel6" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
+                  <Component id="jLabel7" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
+                  <Component id="doctorComboBox1" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                  <Component id="pLname" alignment="0" max="32767" attributes="0"/>
+                  <Component id="pFname" alignment="0" max="32767" attributes="0"/>
+                  <Component id="pID" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabel8" alignment="0" min="-2" pref="261" max="-2" attributes="0"/>
+                  <Component id="passFieldTxt" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
+                      <Component id="validateButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="emailTxt" alignment="0" pref="374" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="120" max="32767" attributes="0"/>
+              <EmptySpace pref="69" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="27" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="33" max="32767" attributes="0"/>
+              <Component id="jLabel9" min="-2" pref="29" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+              <Component id="emailTxt" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="hospitalComboBox" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jLabel8" min="-2" pref="29" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="passFieldTxt" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="validateButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" pref="28" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="locationComboBox" min="-2" max="-2" attributes="0"/>
@@ -84,31 +92,14 @@
               <Component id="jLabel6" min="-2" pref="28" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pID" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="confirmAppointmentButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="SELECT AN HOSPITAL"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="hospitalComboBox">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="1">
-            <StringItem index="0" value="Kaiser Permanente"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="text" type="java.lang.String" value="SELECT THE LOCATION OF THE HOSPITAL"/>
@@ -117,23 +108,7 @@
     <Component class="javax.swing.JComboBox" name="locationComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="15">
-            <StringItem index="0" value="3401 S Harbor Blvd"/>
-            <StringItem index="1" value="Santa Ana"/>
-            <StringItem index="2" value="CA"/>
-            <StringItem index="3" value="3717 S Euclid St"/>
-            <StringItem index="4" value="Garden Grove"/>
-            <StringItem index="5" value="CA"/>
-            <StringItem index="6" value="5451 S Chapman Ave"/>
-            <StringItem index="7" value="Orange"/>
-            <StringItem index="8" value="CA"/>
-            <StringItem index="9" value="506 S Beach Blvd"/>
-            <StringItem index="10" value="Huntington Beach"/>
-            <StringItem index="11" value="CA"/>
-            <StringItem index="12" value="2523 S La Palma Ave"/>
-            <StringItem index="13" value="Anaheim"/>
-            <StringItem index="14" value="CA"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -161,30 +136,7 @@
     <Component class="javax.swing.JComboBox" name="timeComboBox1">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="22">
-            <StringItem index="0" value="08:00"/>
-            <StringItem index="1" value="08:30"/>
-            <StringItem index="2" value="09:00"/>
-            <StringItem index="3" value="09:30"/>
-            <StringItem index="4" value="10:00"/>
-            <StringItem index="5" value="10:30"/>
-            <StringItem index="6" value="11:00"/>
-            <StringItem index="7" value="11:30"/>
-            <StringItem index="8" value="12:00"/>
-            <StringItem index="9" value="12:30"/>
-            <StringItem index="10" value="13:00"/>
-            <StringItem index="11" value="13:30"/>
-            <StringItem index="12" value="14:00"/>
-            <StringItem index="13" value="14:30"/>
-            <StringItem index="14" value="15:30"/>
-            <StringItem index="15" value="16:00"/>
-            <StringItem index="16" value="16:30"/>
-            <StringItem index="17" value="17:00"/>
-            <StringItem index="18" value="17:30"/>
-            <StringItem index="19" value="18:00"/>
-            <StringItem index="20" value="18:30"/>
-            <StringItem index="21" value="19:00"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -234,6 +186,28 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="pID">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel8">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ENTER YOUR PASSWORD"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="passFieldTxt">
+    </Component>
+    <Component class="javax.swing.JButton" name="validateButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="VALIDATE"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="validateButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel9">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ENTER YOUR EMAIL"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="emailTxt">
     </Component>
   </SubComponents>
 </Form>
