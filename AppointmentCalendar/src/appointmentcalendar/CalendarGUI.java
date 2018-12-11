@@ -6,15 +6,15 @@
 package appointmentcalendar;
 
 import static appointmentcalendar.accountLoginGUI.JDBC_DRIVER;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
-=======
-import com.opencsv.CSVWriter;
+//=======
+//import com.opencsv.CSVWriter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
->>>>>>> 274841a856c87fad4aeac9d7c6d4675a5da3e318
+//>>>>>>> 274841a856c87fad4aeac9d7c6d4675a5da3e318
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -327,7 +327,6 @@ public class CalendarGUI extends javax.swing.JFrame {
     private void systemExit()
     {
         WindowEvent winClosing = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosing);
     }
     
     private void createAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAppointmentButtonActionPerformed
@@ -337,21 +336,21 @@ public class CalendarGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_createAppointmentButtonActionPerformed
 
     private void exportFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportFileButtonActionPerformed
-        // TODO add your handling code here:
-        CSVWriter writer;
-        
-        try {
-            writer = new CSVWriter(new FileWriter("Appointments.csv"), '\t');
-            Boolean includeHeaders = true;
-
-            //java.sql.ResultSet myResultSet = .... //your resultset logic here
-
-            //writer.writeAll(myResultSet, includeHeaders);
-
-        writer.close();
-        } catch (IOException ex) {
-            Logger.getLogger(CalendarGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        // TODO add your handling code here:
+//        CSVWriter writer;
+//        
+//        try {
+//            writer = new CSVWriter(new FileWriter("Appointments.csv"), '\t');
+//            Boolean includeHeaders = true;
+//
+//            //java.sql.ResultSet myResultSet = .... //your resultset logic here
+//
+//            //writer.writeAll(myResultSet, includeHeaders);
+//
+//        writer.close();
+//        } catch (IOException ex) {
+//            Logger.getLogger(CalendarGUI.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }//GEN-LAST:event_exportFileButtonActionPerformed
 
