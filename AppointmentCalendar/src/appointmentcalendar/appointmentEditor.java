@@ -7,6 +7,7 @@ package appointmentcalendar;
 
 import java.awt.Component;
 import java.util.Scanner;
+
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -58,7 +59,6 @@ public class appointmentEditor extends javax.swing.JFrame {
         validateButton = new javax.swing.JButton();
         changeLocationButton = new javax.swing.JButton();
         changeDoctorButton = new javax.swing.JButton();
-        changeTimeButton = new javax.swing.JButton();
         appointmentList = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -88,13 +88,6 @@ public class appointmentEditor extends javax.swing.JFrame {
             }
         });
 
-        changeTimeButton.setText("CHANGE TIME");
-        changeTimeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                changeTimeButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,9 +109,7 @@ public class appointmentEditor extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(changeLocationButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(changeTimeButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(130, 130, 130)
                 .addComponent(changeDoctorButton)
                 .addGap(131, 131, 131))
         );
@@ -138,7 +129,6 @@ public class appointmentEditor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(changeLocationButton)
-                    .addComponent(changeTimeButton)
                     .addComponent(changeDoctorButton))
                 .addGap(70, 70, 70))
         );
@@ -152,15 +142,9 @@ public class appointmentEditor extends javax.swing.JFrame {
     }
     
     
-    private void changeTimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeTimeButtonActionPerformed
-            systemExit();
-            timeChanger time = new timeChanger();
-            time.setVisible(true);
-    }//GEN-LAST:event_changeTimeButtonActionPerformed
-
     private void changeDoctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeDoctorButtonActionPerformed
             systemExit();
-            doctorChanger doc = new doctorChanger();
+            doctorTimeChanger doc = new doctorTimeChanger();
             doc.setVisible(true);
     }//GEN-LAST:event_changeDoctorButtonActionPerformed
 
@@ -252,7 +236,6 @@ public class appointmentEditor extends javax.swing.JFrame {
     private javax.persistence.Query appointmentsQuery2;
     private javax.swing.JButton changeDoctorButton;
     private javax.swing.JButton changeLocationButton;
-    private javax.swing.JButton changeTimeButton;
     private javax.swing.JTextField emailText;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel jLabel1;

@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
-public class doctorChanger extends javax.swing.JFrame {
+public class doctorTimeChanger extends javax.swing.JFrame {
 
     static final String JDBC_DRIVER = "org.apache.derby.jdbc.ClientDriver";
     static final String DB_URL = "jdbc:derby://localhost:1527/343Project1testdb";
@@ -30,7 +30,7 @@ public class doctorChanger extends javax.swing.JFrame {
     public Connection conn;
     public Statement stmt; 
     
-    public doctorChanger() {
+    public doctorTimeChanger() {
         initComponents();
     }
 
@@ -45,7 +45,7 @@ public class doctorChanger extends javax.swing.JFrame {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 //            Statement statement = conn.createStatement();    
-            String sql = "Select doctorName "
+            String sql = "Select doctorName, appointmentDateTime FROM Appointments "
                     + "NATURAL JOIN Patients WHERE pEmail = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
 //            ResultSet rs = statement.executeQuery(sql);
@@ -57,7 +57,8 @@ public class doctorChanger extends javax.swing.JFrame {
             while(rs.next())
             {
                 JOptionPane.showMessageDialog(null, "Email address is valid!");   
-                originalDoctorTextArea.append(rs.getString("doctorName")); 
+                originalDoctorTextArea.append(rs.getString("doctorName") + " " + 
+                        rs.getString("appointmentDateTime")); 
 //                hospitalLocationList.addItem(rs.getString("hospitalName") + " " + 
 //                        rs.getString("hospitalAddress"));  
             }                          
@@ -74,7 +75,7 @@ public class doctorChanger extends javax.swing.JFrame {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 //            Statement statement = conn.createStatement();    
-            String sql = "Select doctorName FROM Hospital "
+            String sql = "Select doctorName, appointmentDateTime FROM Appointments "
                     + "NATURAL JOIN Patients WHERE pEmail = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
 //            ResultSet rs = statement.executeQuery(sql);
@@ -87,7 +88,8 @@ public class doctorChanger extends javax.swing.JFrame {
             {
 //                hospitalLocationList.addItem(rs.getString("hospitalName") + " " + 
 //                        rs.getString("hospitalAddress"));  
-                doctorList.addItem(rs.getString("doctorName"));
+                doctorList.addItem(rs.getString("doctorName") + " " + 
+                        rs.getString("appointmentDateTime"));
             }                          
         }
         catch(Exception e)
@@ -118,9 +120,9 @@ public class doctorChanger extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Original Doctor");
+        jLabel1.setText("Original Appointment Time");
 
-        jLabel2.setText("New Doctor");
+        jLabel2.setText("New Appointment Time");
 
         confirmButton.setText("CONFIRM");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
@@ -161,15 +163,14 @@ public class doctorChanger extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2)
-                                .addComponent(doctorList, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(patientIDText, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(patientIDText, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(emailText, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                            .addComponent(doctorList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(206, 206, 206)
                         .addComponent(validateButton))
@@ -220,13 +221,13 @@ public class doctorChanger extends javax.swing.JFrame {
         try{
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
-            String sql = "UPDATE Appointments SET hospitalAddress = ? "
-            + "WHERE pID = ?";
+            String sql = "UPDATE Appointments SET appointmentDateTime = ? "
+                    + "WHERE pID = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            hospitalLocationList.getSelectedIndex();
+            doctorList.getSelectedIndex();
             statement.clearParameters();
-            statement.setString(1,hospitalLocationList.getSelectedItem().toString());
+            statement.setString(1,doctorList.getSelectedItem().toString());
             statement.setString(2,patientIDText.getText());
             statement.executeUpdate();
             JOptionPane.showMessageDialog(null, "UPDATE SUCCESSFUL!");
@@ -243,7 +244,7 @@ public class doctorChanger extends javax.swing.JFrame {
 
     private void validateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validateButtonActionPerformed
         validation();
-        newLocations();
+        newDoctors();
     }//GEN-LAST:event_validateButtonActionPerformed
 
     private void originalDoctorTextAreaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_originalDoctorTextAreaAncestorAdded
@@ -267,20 +268,21 @@ public class doctorChanger extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(doctorChanger.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(doctorTimeChanger.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(doctorChanger.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(doctorTimeChanger.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(doctorChanger.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(doctorTimeChanger.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(doctorChanger.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(doctorTimeChanger.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new doctorChanger().setVisible(true);
+                new doctorTimeChanger().setVisible(true);
             }
         });
     }
