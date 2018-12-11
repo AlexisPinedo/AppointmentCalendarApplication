@@ -55,6 +55,8 @@ public class appointmentDeleter extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         appointmentList = new javax.swing.JComboBox<>();
         appointmentRemove = new javax.swing.JButton();
+        patientIDText = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,6 +78,8 @@ public class appointmentDeleter extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("6 digit Patient ID Number");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,18 +87,21 @@ public class appointmentDeleter extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6)
-                            .addComponent(emailText, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
-                            .addComponent(jLabel1)
-                            .addComponent(appointmentList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(219, 219, 219)
                         .addComponent(validateButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(176, 176, 176)
-                        .addComponent(appointmentRemove)))
+                        .addGap(179, 179, 179)
+                        .addComponent(appointmentRemove))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(patientIDText, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel6)
+                                .addComponent(emailText, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addComponent(appointmentList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -110,9 +117,13 @@ public class appointmentDeleter extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(appointmentList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(patientIDText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(appointmentRemove)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGap(42, 42, 42))
         );
 
         pack();
@@ -124,8 +135,7 @@ public class appointmentDeleter extends javax.swing.JFrame {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 //            Statement statement = conn.createStatement();    
-            String sql = "Select hospitalName, hospitalAddress,"
-                    + "doctorName, appointmentDateTime FROM Appointments "
+            String sql = "Select appointmentDateTime FROM Appointments "
                     + "NATURAL JOIN Patients WHERE pEmail = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
 //            ResultSet rs = statement.executeQuery(sql);
@@ -138,10 +148,7 @@ public class appointmentDeleter extends javax.swing.JFrame {
             {
 //                hospitalLocationList.addItem(rs.getString("hospitalName") + " " + 
 //                        rs.getString("hospitalAddress"));  
-                appointmentList.addItem(rs.getString("hospitalName") + " " + 
-                        rs.getString("hospitalAddress") + " " + 
-                        rs.getString("doctorName") + " " + 
-                        rs.getString("appointmentDateTime"));
+                appointmentList.addItem(rs.getString("appointmentDateTime"));
             }                          
         }
         catch(Exception e)
@@ -160,15 +167,13 @@ public class appointmentDeleter extends javax.swing.JFrame {
         try{
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
-            String sql = "DELETE pID, pFname, pLname, hID, hospitalName, "
-                    + "hospitalAddress, dID, doctorName, "
-                    + "appointmentDateTime FROM Appointments "
-                    + "NATURAL JOIN Patients WHERE pEmail = ?";
+            String sql = "DELETE FROM Appointments WHERE appointmentDateTime = ? AND pID = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
 
             appointmentList.getSelectedIndex();
             statement.clearParameters();
             statement.setString(1,appointmentList.getSelectedItem().toString());
+            statement.setString(2,patientIDText.getText());
             statement.executeUpdate();
             JOptionPane.showMessageDialog(null, "UPDATE SUCCESSFUL!");
 
@@ -222,7 +227,9 @@ public class appointmentDeleter extends javax.swing.JFrame {
     private javax.swing.JButton appointmentRemove;
     private javax.swing.JTextField emailText;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JTextField patientIDText;
     private javax.swing.JButton validateButton;
     // End of variables declaration//GEN-END:variables
 }
