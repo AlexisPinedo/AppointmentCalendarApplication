@@ -38,6 +38,63 @@ public class doctorChanger extends javax.swing.JFrame {
     {
         WindowEvent winClosing = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
     }
+    
+    private void validation()
+    {
+        try{
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+//            Statement statement = conn.createStatement();    
+            String sql = "Select doctorName "
+                    + "NATURAL JOIN Patients WHERE pEmail = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+//            ResultSet rs = statement.executeQuery(sql);
+            
+            statement.clearParameters();
+            statement.setString(1,emailText.getText());
+            ResultSet rs = statement.executeQuery();
+            
+            while(rs.next())
+            {
+                JOptionPane.showMessageDialog(null, "Email address is valid!");   
+                originalDoctorTextArea.append(rs.getString("doctorName")); 
+//                hospitalLocationList.addItem(rs.getString("hospitalName") + " " + 
+//                        rs.getString("hospitalAddress"));  
+            }                          
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }   
+    }
+    
+    public void newDoctors()
+    {
+        try{
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+//            Statement statement = conn.createStatement();    
+            String sql = "Select doctorName FROM Hospital "
+                    + "NATURAL JOIN Patients WHERE pEmail = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+//            ResultSet rs = statement.executeQuery(sql);
+            
+            statement.clearParameters();
+            statement.setString(1,emailText.getText());
+            ResultSet rs = statement.executeQuery();
+         
+            while(rs.next())
+            {
+//                hospitalLocationList.addItem(rs.getString("hospitalName") + " " + 
+//                        rs.getString("hospitalAddress"));  
+                doctorList.addItem(rs.getString("doctorName"));
+            }                          
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }          
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,24 +104,54 @@ public class doctorChanger extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        hospitalLocationList = new javax.swing.JComboBox<>();
-        confirmButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        originalHospital = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
+        doctorList = new javax.swing.JComboBox<>();
+        confirmButton = new javax.swing.JButton();
+        patientIDText = new javax.swing.JTextField();
+        emailText = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        validateButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        originalDoctorTextArea = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        confirmButton.setText("CONFIRM");
-
         jLabel1.setText("Original Doctor");
 
-        originalHospital.setColumns(20);
-        originalHospital.setRows(5);
-        jScrollPane1.setViewportView(originalHospital);
-
         jLabel2.setText("New Doctor");
+
+        confirmButton.setText("CONFIRM");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("6 digit Patient ID Number");
+
+        validateButton.setText("VALIDATE");
+        validateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validateButtonActionPerformed(evt);
+            }
+        });
+
+        originalDoctorTextArea.setColumns(20);
+        originalDoctorTextArea.setRows(5);
+        originalDoctorTextArea.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                originalDoctorTextAreaAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jScrollPane2.setViewportView(originalDoctorTextArea);
+
+        jLabel6.setText("Enter your Email Address");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,34 +161,94 @@ public class doctorChanger extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(hospitalLocationList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2)
+                                .addComponent(doctorList, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(patientIDText, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(208, 208, 208)
+                        .addGap(206, 206, 206)
+                        .addComponent(validateButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(206, 206, 206)
                         .addComponent(confirmButton)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGap(60, 60, 60)
+                    .addComponent(jLabel6)
+                    .addContainerGap(330, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
+                .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(validateButton)
+                .addGap(2, 2, 2)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hospitalLocationList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(78, 78, 78)
+                .addComponent(doctorList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(patientIDText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(confirmButton)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGap(47, 47, 47))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(12, 12, 12)
+                    .addComponent(jLabel6)
+                    .addContainerGap(321, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+
+        try{
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            String sql = "UPDATE Appointments SET hospitalAddress = ? "
+            + "WHERE pID = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            hospitalLocationList.getSelectedIndex();
+            statement.clearParameters();
+            statement.setString(1,hospitalLocationList.getSelectedItem().toString());
+            statement.setString(2,patientIDText.getText());
+            statement.executeUpdate();
+            JOptionPane.showMessageDialog(null, "UPDATE SUCCESSFUL!");
+
+            systemExit();
+            accountLoginGUI login = new accountLoginGUI();
+            login.setVisible(true);
+
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_confirmButtonActionPerformed
+
+    private void validateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validateButtonActionPerformed
+        validation();
+        newLocations();
+    }//GEN-LAST:event_validateButtonActionPerformed
+
+    private void originalDoctorTextAreaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_originalDoctorTextAreaAncestorAdded
+
+    }//GEN-LAST:event_originalDoctorTextAreaAncestorAdded
 
     /**
      * @param args the command line arguments
@@ -140,10 +287,15 @@ public class doctorChanger extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton confirmButton;
-    private javax.swing.JComboBox<String> hospitalLocationList;
+    private javax.swing.JComboBox<String> doctorList;
+    private javax.swing.JTextField emailText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea originalHospital;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea originalDoctorTextArea;
+    private javax.swing.JTextField patientIDText;
+    private javax.swing.JButton validateButton;
     // End of variables declaration//GEN-END:variables
 }
